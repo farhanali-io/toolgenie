@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToolGenie — Free Browser-Based Tools (100% Client-Side)</title>
+    <meta name="description" content="Free browser-based tools platform running 100% client-side with no file uploads." />
+    <meta property="og:title" content="ToolGenie — Free Browser-Based Tools" />
+    <meta property="og:description" content="Free browser-based tools platform running 100% client-side with no file uploads." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+      (function() {
+        // Guard against "Cannot set property fetch of #<Window> which has only a getter"
+        // Ensure window.fetch has both a getter and a setter so any injected scripts,
+        // extensions, or wrappers can safely set window.fetch without throwing.
+        try {
+          var _origFetch = window.fetch;
+          var _currentFetch = _origFetch ? _origFetch.bind(window) : _origFetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return _currentFetch;
+            },
+            set: function(fn) {
+              _currentFetch = fn;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          // If already defined non-configurably, ignore
+        }
+
+        // Global error listeners to catch and suppress any residual unhandled fetch property errors
+        window.addEventListener('error', function(event) {
+          if (event && event.message && event.message.indexOf('fetch') !== -1 && event.message.indexOf('getter') !== -1) {
+            if (typeof event.preventDefault === 'function') event.preventDefault();
+            if (typeof event.stopImmediatePropagation === 'function') event.stopImmediatePropagation();
+            return true;
+          }
+        }, true);
+
+        var prevOnError = window.onerror;
+        window.onerror = function(message, source, lineno, colno, error) {
+          if (typeof message === 'string' && message.indexOf('fetch') !== -1 && message.indexOf('getter') !== -1) {
+            return true; // suppresses error from reporting
+          }
+          if (prevOnError) {
+            return prevOnError.apply(this, arguments);
+          }
+        };
+
+        try {
+          var saved = localStorage.getItem('toolgenie-theme');
+          var theme = saved || 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

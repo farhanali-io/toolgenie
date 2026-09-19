@@ -1,0 +1,7 @@
+# ToolGenie Robots.txt
+# All search engine bots are welcome to index all public client-side tools
+
+User-agent: *
+Allow: /
+
+Sitemap: https://toolgenie.online/sitemap.xml

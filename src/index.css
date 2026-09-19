@@ -1,0 +1,284 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   ToolGenie 7-Theme Skin Architecture (CSS Custom Properties)
+   ========================================================================== */
+
+/* 1. LIGHT THEME (Default) — white bg, gray dividers, blue/purple accent */
+html[data-theme="light"] {
+  --bg-page: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f1f5f9;
+  --bg-elevated: #ffffff;
+  --bg-input: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border-subtle: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-glow: rgba(79, 70, 229, 0.22);
+  --accent-contrast: #ffffff;
+  --header-bg: rgba(248, 250, 252, 0.85);
+  --badge-live-bg: rgba(16, 185, 129, 0.12);
+  --badge-live-text: #059669;
+  --badge-soon-bg: rgba(148, 163, 184, 0.16);
+  --badge-soon-text: #64748b;
+  --ring-color: rgba(79, 70, 229, 0.4);
+}
+
+/* 2. DARK THEME — near-black bg, elevated cards, blue/purple accent */
+html[data-theme="dark"] {
+  --bg-page: #0b0f19;
+  --bg-surface: #111827;
+  --bg-surface-hover: #172033;
+  --bg-elevated: #1e293b;
+  --bg-input: #151d2c;
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --text-muted: #64748b;
+  --border-subtle: #1f2937;
+  --border-strong: #374151;
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --accent-glow: rgba(99, 102, 241, 0.32);
+  --accent-contrast: #ffffff;
+  --header-bg: rgba(11, 15, 25, 0.85);
+  --badge-live-bg: rgba(16, 185, 129, 0.18);
+  --badge-live-text: #34d399;
+  --badge-soon-bg: rgba(75, 85, 99, 0.3);
+  --badge-soon-text: #9ca3af;
+  --ring-color: rgba(99, 102, 241, 0.4);
+}
+
+/* 3. MIDNIGHT BLUE — deep navy bg, cyan/blue accents */
+html[data-theme="midnight"] {
+  --bg-page: #070d1e;
+  --bg-surface: #0e1a38;
+  --bg-surface-hover: #15254d;
+  --bg-elevated: #1a2e5e;
+  --bg-input: #0a132c;
+  --text-primary: #f0f6fc;
+  --text-secondary: #94a3b8;
+  --text-muted: #475569;
+  --border-subtle: #192b55;
+  --border-strong: #233b73;
+  --accent: #06b6d4;
+  --accent-hover: #22d3ee;
+  --accent-glow: rgba(6, 182, 212, 0.32);
+  --accent-contrast: #04121e;
+  --header-bg: rgba(7, 13, 30, 0.85);
+  --badge-live-bg: rgba(6, 182, 212, 0.16);
+  --badge-live-text: #22d3ee;
+  --badge-soon-bg: rgba(30, 41, 59, 0.5);
+  --badge-soon-text: #94a3b8;
+  --ring-color: rgba(6, 182, 212, 0.4);
+}
+
+/* 4. EMERALD — dark green bg, mint/lime accents */
+html[data-theme="emerald"] {
+  --bg-page: #041611;
+  --bg-surface: #0a251e;
+  --bg-surface-hover: #10342b;
+  --bg-elevated: #154136;
+  --bg-input: #071f18;
+  --text-primary: #f0fdf4;
+  --text-secondary: #a7f3d0;
+  --text-muted: #4ade80;
+  --border-subtle: #123d32;
+  --border-strong: #1b5244;
+  --accent: #10b981;
+  --accent-hover: #34d399;
+  --accent-glow: rgba(16, 185, 129, 0.32);
+  --accent-contrast: #022018;
+  --header-bg: rgba(4, 22, 17, 0.85);
+  --badge-live-bg: rgba(16, 185, 129, 0.18);
+  --badge-live-text: #34d399;
+  --badge-soon-bg: rgba(20, 60, 50, 0.4);
+  --badge-soon-text: #86efac;
+  --ring-color: rgba(16, 185, 129, 0.4);
+}
+
+/* 5. SUNSET — dark purple/burgundy bg, orange/pink accents */
+html[data-theme="sunset"] {
+  --bg-page: #17091d;
+  --bg-surface: #24112c;
+  --bg-surface-hover: #31173c;
+  --bg-elevated: #411f4f;
+  --bg-input: #1d0d24;
+  --text-primary: #fdf2f8;
+  --text-secondary: #f472b6;
+  --text-muted: #c084fc;
+  --border-subtle: #3a1945;
+  --border-strong: #572568;
+  --accent: #f97316;
+  --accent-hover: #fb923c;
+  --accent-glow: rgba(249, 115, 22, 0.35);
+  --accent-contrast: #ffffff;
+  --header-bg: rgba(23, 9, 29, 0.85);
+  --badge-live-bg: rgba(249, 115, 22, 0.18);
+  --badge-live-text: #fb923c;
+  --badge-soon-bg: rgba(65, 31, 79, 0.5);
+  --badge-soon-text: #f472b6;
+  --ring-color: rgba(249, 115, 22, 0.4);
+}
+
+/* 6. ROSE GOLD — cream bg, rose/pink accents (a light theme) */
+html[data-theme="rose-gold"] {
+  --bg-page: #faf5f3;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #fcf1ef;
+  --bg-elevated: #ffffff;
+  --bg-input: #f5ebe7;
+  --text-primary: #2d181b;
+  --text-secondary: #70474e;
+  --text-muted: #a37b83;
+  --border-subtle: #eddcd7;
+  --border-strong: #dec3bc;
+  --accent: #e11d48;
+  --accent-hover: #be123c;
+  --accent-glow: rgba(225, 29, 72, 0.25);
+  --accent-contrast: #ffffff;
+  --header-bg: rgba(250, 245, 243, 0.85);
+  --badge-live-bg: rgba(225, 29, 72, 0.12);
+  --badge-live-text: #be123c;
+  --badge-soon-bg: rgba(163, 123, 131, 0.15);
+  --badge-soon-text: #70474e;
+  --ring-color: rgba(225, 29, 72, 0.4);
+}
+
+/* 7. CYBERPUNK — near-black bg, neon magenta/cyan accents */
+html[data-theme="cyberpunk"] {
+  --bg-page: #090514;
+  --bg-surface: #130a26;
+  --bg-surface-hover: #1c0e38;
+  --bg-elevated: #26134b;
+  --bg-input: #0f081e;
+  --text-primary: #f5f3ff;
+  --text-secondary: #d8b4fe;
+  --text-muted: #9333ea;
+  --border-subtle: #2d1655;
+  --border-strong: #49228a;
+  --accent: #ec4899;
+  --accent-hover: #06b6d4;
+  --accent-glow: rgba(236, 72, 153, 0.4);
+  --accent-contrast: #ffffff;
+  --header-bg: rgba(9, 5, 20, 0.85);
+  --badge-live-bg: rgba(6, 182, 212, 0.18);
+  --badge-live-text: #22d3ee;
+  --badge-soon-bg: rgba(56, 18, 107, 0.5);
+  --badge-soon-text: #c084fc;
+  --ring-color: rgba(236, 72, 153, 0.4);
+}
+
+/* Base resets & typography */
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  transition: background-color 200ms ease, color 200ms ease;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* ==========================================================================
+   Signature Hover Glow & Lift System
+   ========================================================================== */
+
+.toolgenie-hover-glow {
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 220ms ease-out,
+              background-color 220ms ease-out;
+  position: relative;
+}
+
+.toolgenie-hover-glow:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 14px 28px -6px var(--category-glow, var(--accent-glow));
+  border-color: var(--category-accent, var(--accent));
+}
+
+.toolgenie-hover-glow:hover .tool-icon-wrapper {
+  filter: brightness(1.2) saturate(1.3);
+}
+
+/* Disabled hover glow on coming soon cards */
+.toolgenie-coming-soon {
+  opacity: 0.85;
+  cursor: default;
+}
+
+.toolgenie-coming-soon:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .toolgenie-hover-glow,
+  .toolgenie-hover-glow:hover,
+  .sparkle-dot,
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   Logo Sparkle Animation
+   ========================================================================== */
+
+@keyframes sparklePulse {
+  0%, 100% {
+    transform: scale(0.9) translateY(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.35) translateY(-2px);
+    opacity: 1;
+  }
+}
+
+.sparkle-dot {
+  transform-origin: center;
+  animation: sparklePulse 2.8s ease-in-out infinite;
+}
+
+.sparkle-dot-1 {
+  animation-delay: 0s;
+}
+
+.sparkle-dot-2 {
+  animation-delay: 0.7s;
+}
+
+.sparkle-dot-3 {
+  animation-delay: 1.4s;
+}
+
+.toolgenie-logo:hover .sparkle-dot {
+  animation-duration: 1.2s;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-page);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
