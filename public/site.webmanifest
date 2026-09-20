@@ -1,6 +1,7 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "ToolGenie",
+  "short_name": "ToolGenie",
+  "description": "Free browser-based tools that run 100% client-side. No uploads, no signup, no limits.",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -13,9 +14,16 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
     }
   ],
-  "theme_color": "#ffffff",
+  "theme_color": "#c026d3",
   "background_color": "#ffffff",
-  "display": "standalone"
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/"
 }
