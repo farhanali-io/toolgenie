@@ -1,7 +1,46 @@
 # ToolGenie Robots.txt
-# All search engine bots are welcome to index all public client-side tools
+# All search engine bots are welcome to index all public client-side tools.
+# All major AI crawlers are explicitly allowed for search, browsing, and training.
 
 User-agent: *
+Allow: /
+
+# --- OpenAI ---
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# --- Google (AI) ---
+User-agent: Google-Extended
+Allow: /
+
+# --- Anthropic (Claude) ---
+User-agent: ClaudeBot
+Allow: /
+
+# --- Perplexity AI ---
+User-agent: PerplexityBot
+Allow: /
+
+# --- Apple (Apple Intelligence) ---
+User-agent: Applebot-Extended
+Allow: /
+
+# --- Meta (Meta AI) ---
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# --- Cohere ---
+User-agent: cohere-ai
+Allow: /
+
+# --- ByteDance (TikTok / AI) ---
+User-agent: Bytespider
 Allow: /
 
 Sitemap: https://toolgenie.online/sitemap.xml
