@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none" role="img" aria-label="ToolGenie lamp icon">
+  <defs>
+    <linearGradient id="tg-lamp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff5cc8"/>
+      <stop offset="1" stop-color="#c026d3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Handle (thicker so it reads at 16px) -->
+  <path d="M 28 80 C 5 82 5 110 28 108"
+        stroke="url(#tg-lamp)" stroke-width="9"
+        stroke-linecap="round" fill="none"/>
+
+  <!-- Spout (slightly wider) -->
+  <path d="M 86 90 C 100 86 110 74 116 60
+           C 118 55 125 57 123 63
+           C 119 79 106 92 90 96 Z"
+        fill="url(#tg-lamp)"/>
+
+  <!-- Body -->
+  <ellipse cx="60" cy="90" rx="36" ry="19" fill="url(#tg-lamp)"/>
+
+  <!-- Lid rim (thicker dark band for definition) -->
+  <rect x="46" y="70" width="28" height="6" rx="2" fill="#9d174d"/>
+
+  <!-- Lid dome (taller so the shape reads) -->
+  <path d="M 48 70 Q 60 56 72 70 Z" fill="url(#tg-lamp)"/>
+
+  <!-- Finial knob (bigger) -->
+  <circle cx="60" cy="53" r="4.5" fill="#ff5cc8"/>
+
+  <!-- Wisps (bigger + closer to the spout) -->
+  <circle cx="117" cy="48" r="4.5" fill="#22d3ee"/>
+  <circle cx="121" cy="36" r="3.5" fill="#67e8f9"/>
+  <circle cx="117" cy="25" r="3" fill="#a5f3fc"/>
+</svg>
