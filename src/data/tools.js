@@ -399,8 +399,8 @@ export const categories = [
     name: "Video Tools",
     slug: "video-tools",
     accentColor: "#ec4899",
-    status: "coming-soon",
-    description: "Fast in-browser video manipulation utilizing WebAssembly FFmpeg and WebCodecs.",
+    status: "live",
+    description: "Hardware-accelerated in-browser video manipulation utilizing WebCodecs and MediaBunny.",
     tools: [
       {
         name: "Trim Video",
@@ -408,13 +408,13 @@ export const categories = [
         icon: "Video",
         shortDescription: "Cut out unwanted clips or select exact start and end timestamps.",
         longDescription: "Slice MP4, WebM, and MOV video clips with visual timeline scrubbing without re-encoding delays or cloud uploads.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
-          { q: "Will video trimming require uploading large files?", a: "No, ToolGenie's upcoming video suite uses in-browser FFmpeg WebAssembly to execute all cuts locally." },
-          { q: "Does lossless trimming avoid re-encoding?", a: "Yes, keyframe-based cuts will be supported to produce instant exports without quality degradation." },
-          { q: "Which formats will be supported?", a: "MP4, WebM, MOV, and MKV formats." },
-          { q: "Can I preview the exact frame when trimming?", a: "Yes, interactive scrubber thumbnails will let you pin down millisecond precision." },
-          { q: "When will this tool be available?", a: "This tool is part of our upcoming release currently undergoing client-side WebAssembly optimization." }
+          { q: "Will video trimming require uploading large files?", a: "No, ToolGenie uses in-browser hardware-accelerated WebCodecs via MediaBunny to execute all cuts locally." },
+          { q: "Does lossless trimming avoid re-encoding?", a: "Yes, microsecond-accurate stream trimming is supported to produce fast exports with maximum fidelity." },
+          { q: "Which formats are supported?", a: "MP4, WebM, MOV, and MKV formats." },
+          { q: "Can I preview the exact frame when trimming?", a: "Yes, an interactive video scrubber lets you pin down exact start and end timestamps." },
+          { q: "Are my clips uploaded to any servers?", a: "Never. All processing occurs 100% client-side in your local browser." }
         ]
       },
       {
@@ -423,13 +423,13 @@ export const categories = [
         icon: "Minimize",
         shortDescription: "Reduce video file sizes to meet Discord, email, or web constraints.",
         longDescription: "Optimize bitrate, framerate, and resolution to shrink video files efficiently without sending private clips to remote servers.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
-          { q: "How can videos be compressed in a browser?", a: "By leveraging multi-threaded WebAssembly encoders like x264 and VP9 running in background web workers." },
+          { q: "How can videos be compressed in a browser?", a: "By leveraging multi-threaded WebCodecs hardware acceleration and MediaBunny running 10-20x faster than WebAssembly." },
           { q: "Can I set a target file size like 8MB or 25MB?", a: "Yes, target-size mode automatically calculates the ideal bitrate for platform constraints." },
           { q: "Will my private videos remain secure?", a: "100%. No video frames or audio tracks are ever sent over the internet." },
-          { q: "Will H.264 and H.265 be supported?", a: "Universal H.264 / AAC MP4 output will be standard for playback on all modern devices." },
-          { q: "Can I downscale 4K video to 1080p or 720p?", a: "Yes, resolution presets will allow significant file size reductions." }
+          { q: "Will H.264 and modern codecs be supported?", a: "Universal H.264 / AAC MP4 output is standard for playback across all modern devices." },
+          { q: "Can I downscale 4K video to 1080p or 720p?", a: "Yes, resolution presets and scaling factors allow dramatic file size savings." }
         ]
       },
       {
@@ -438,13 +438,13 @@ export const categories = [
         icon: "Film",
         shortDescription: "Convert exciting video moments into lightweight animated GIFs.",
         longDescription: "Turn video clips into shareable animated GIFs with custom framerate, width, color dithering palettes, and looping options.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
-          { q: "Can I select a specific clip segment for the GIF?", a: "Yes, set in and out points to capture only the highlight reel." },
-          { q: "How do I keep the GIF file size small?", a: "Adjust FPS (e.g. 10–15 fps) and scale dimensions (e.g. 480px width) for lightweight sharing." },
-          { q: "What dithering algorithms are used?", a: "Floyd-Steinberg and palettegen algorithms ensure smooth color transitions without color banding." },
-          { q: "Can I add text captions to the GIF?", a: "Text overlay customization will be integrated into the GIF export workflow." },
-          { q: "Is audio preserved in a GIF?", a: "The GIF format does not support sound, but you can export as looping WebM/MP4 as well." }
+          { q: "Can I select a specific clip segment for the GIF?", a: "Yes, set in and out points with live scrubbing to capture only the highlight reel." },
+          { q: "How do I keep the GIF file size small?", a: "Adjust FPS (10, 15, or 24 fps) and target width (320px, 480px, or 640px) for lightweight sharing." },
+          { q: "What color quantization algorithms are used?", a: "High-performance NeuQuant and median-cut color quantization via gifenc ensures smooth color transitions." },
+          { q: "Is the GIF conversion done on the server?", a: "No, frames are decoded and quantized directly in your browser." },
+          { q: "Is audio preserved in a GIF?", a: "The GIF format does not support audio, but you can extract audio separately or export as video." }
         ]
       },
       {
@@ -452,14 +452,14 @@ export const categories = [
         slug: "extract-audio",
         icon: "FileAudio",
         shortDescription: "Strip and save the sound track from any video file as MP3 or WAV.",
-        longDescription: "Demux and save music, speeches, or background audio from video files into pure MP3, AAC, or uncompressed WAV audio files.",
-        status: "coming-soon",
+        longDescription: "Demux and save music, speeches, or background audio from video files into pure MP3 or uncompressed studio WAV audio files.",
+        status: "live",
         faqs: [
-          { q: "Is audio extraction fast?", a: "Yes, demuxing audio without re-encoding the stream is virtually instantaneous." },
-          { q: "Can I export in MP3, AAC, and WAV formats?", a: "Yes, you can extract the raw audio stream or transcode to your preferred format." },
-          { q: "Can I extract audio from long webinar recordings?", a: "Yes, long-form videos can be processed without cloud upload caps." },
-          { q: "Does audio quality stay true to the original?", a: "Yes, uncompressed extraction retains the exact original audio bitrate and sample rate." },
-          { q: "Will this work on smartphones?", a: "Yes, supported in modern mobile web browsers." }
+          { q: "Is audio extraction fast?", a: "Yes, extracting audio tracks with MediaBunny hardware acceleration completes in seconds." },
+          { q: "Can I export in MP3 and WAV formats?", a: "Yes, choose universal MP3 with custom bitrates or lossless 16-bit PCM WAV." },
+          { q: "Can I extract audio from long webinar recordings?", a: "Yes, long-form videos can be processed without cloud upload caps or bandwidth limits." },
+          { q: "Does audio quality stay true to the original?", a: "Yes, lossless WAV extraction preserves 100% of the original audio sample accuracy." },
+          { q: "Will this work on mobile devices?", a: "Yes, modern mobile web browsers with WebCodecs support are fully compatible." }
         ]
       },
       {
@@ -468,13 +468,13 @@ export const categories = [
         icon: "VolumeX",
         shortDescription: "Remove unwanted background noise or audio tracks from video files.",
         longDescription: "Strip the audio channel entirely from your video to produce silent clips for background website heroes or confidential sharing.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
-          { q: "Does muting a video re-encode the video stream?", a: "No, stripping the audio track can be completed via stream-copy in seconds without quality loss." },
+          { q: "Does muting a video re-encode the video stream?", a: "No, stripping the audio track is executed via stream copy in seconds with zero video quality loss." },
           { q: "Will the video file size decrease?", a: "Yes, removing audio reduces the file size by the weight of the audio stream." },
-          { q: "Can I mute specific channels?", a: "The tool strips all audio tracks by default, ensuring complete silence." },
-          { q: "Is this safe for proprietary recordings?", a: "Yes, since processing is purely local, sensitive corporate footage remains private." },
-          { q: "What formats can be muted?", a: "All major formats including MP4, WebM, MOV, and AVI." }
+          { q: "Can I preview the muted video before downloading?", a: "Yes, a built-in player lets you audition the silent video immediately." },
+          { q: "Is this safe for proprietary recordings?", a: "Yes, since processing is purely local, sensitive corporate footage remains completely private." },
+          { q: "What formats can be muted?", a: "All major containers including MP4, WebM, MOV, and MKV." }
         ]
       },
       {
@@ -483,13 +483,13 @@ export const categories = [
         icon: "Scaling",
         shortDescription: "Change video dimensions, aspect ratios, or scale for social channels.",
         longDescription: "Scale video dimensions to 16:9 for YouTube, 9:16 for TikTok/Reels, or 1:1 for Instagram feeds with padding and cropping options.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
-          { q: "Can I convert landscape video to portrait (9:16)?", a: "Yes, with smart center crop or blurred background padding options." },
-          { q: "Will resizing retain the original framerate?", a: "Yes, framerates are preserved or can be customized as needed." },
-          { q: "Can I select custom pixel dimensions?", a: "Yes, enter explicit width and height or lock standard aspect ratios." },
-          { q: "Does this require GPU acceleration?", a: "It utilizes WebGL and WebGPU when available on your browser for faster rendering." },
-          { q: "When will video resizing launch?", a: "Coming in Chunk 2 of the ToolGenie rollout." }
+          { q: "Can I convert landscape video to portrait (9:16)?", a: "Yes, with smart center crop or contain fit modes." },
+          { q: "Will resizing retain the original framerate?", a: "Yes, video timestamps and framerates are maintained throughout the pipeline." },
+          { q: "Can I select custom pixel dimensions?", a: "Yes, enter custom width and height or lock the original aspect ratio." },
+          { q: "Does this require GPU acceleration?", a: "It utilizes native hardware WebCodecs for high-speed hardware-accelerated video scaling." },
+          { q: "Are files uploaded to a remote server?", a: "No, all transformation takes place entirely on your device." }
         ]
       },
       {
@@ -498,13 +498,13 @@ export const categories = [
         icon: "ArrowRightLeft",
         shortDescription: "Convert between MP4, WebM, MOV, MKV, and AVI video formats.",
         longDescription: "Transcode video files into universally compatible MP4 containers or modern WebM formats directly on your local device.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
           { q: "Can I convert MOV files from iPhone to MP4?", a: "Yes, Apple QuickTime MOV files can be converted into standard MP4." },
-          { q: "Is WebM conversion supported for web developers?", a: "Yes, encode into royalty-free VP8/VP9 WebM files optimized for web playback." },
-          { q: "Are subtitles and multiple audio tracks preserved?", a: "You will be able to choose whether to passthrough or merge subtitle tracks." },
+          { q: "Is WebM conversion supported?", a: "Yes, encode into royalty-free WebM files optimized for web playback." },
+          { q: "Is transmuxing supported for fast conversion?", a: "Yes! If the video codec is compatible, MediaBunny will copy streams instantly without re-encoding." },
           { q: "Is this tool completely free?", a: "Yes, no watermarks, duration limits, or subscription tiers." },
-          { q: "Does it upload files to third-party servers?", a: "Never. All transcoding operates locally via WebAssembly." }
+          { q: "Does it upload files to third-party servers?", a: "Never. All transcoding operates locally on your machine." }
         ]
       }
     ]
@@ -696,7 +696,7 @@ export const categories = [
     name: "AI Tools",
     slug: "ai-tools",
     accentColor: "#14b8a6",
-    status: "coming-soon",
+    status: "live",
     description: "Private on-device machine learning models running via WebGPU and WebAssembly.",
     tools: [
       {
@@ -705,13 +705,13 @@ export const categories = [
         icon: "Sparkles",
         shortDescription: "Condense long articles and reports into concise key takeaways.",
         longDescription: "Extract main concepts, bullet-point highlights, and brief executive summaries from long documents using localized on-device language models.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
-          { q: "How can AI models run inside a web browser?", a: "Using WebGPU and optimized quantized ONNX models loaded directly into your browser's memory." },
-          { q: "Is my text private when using AI summarization?", a: "Yes! Because the neural model runs on your own device GPU, no text is sent to external cloud APIs." },
-          { q: "Can I control summary length?", a: "Yes, choose between short bullet points, medium overviews, or detailed executive summaries." },
-          { q: "What languages will be supported?", a: "English and several major global languages will be supported at launch." },
-          { q: "When will this AI tool be available?", a: "This model is being benchmarked for client-side WebGPU acceleration in Chunk 2-4." }
+          { q: "How can AI models run inside a web browser?", a: "Using WebAssembly, Cache API, and optimized quantized ONNX models loaded directly into an isolated Web Worker." },
+          { q: "Is my text private when using AI summarization?", a: "Yes! Because the neural model runs on your own device GPU/CPU, no text is ever sent to external cloud APIs." },
+          { q: "Can I control summary length?", a: "Yes, choose between short key takeaways, medium overviews, or detailed executive summaries." },
+          { q: "What model is used for summarization?", a: "DistilBART-CNN-6-6 quantized via Transformers.js for fast on-device inference." },
+          { q: "Is the model cached for offline use?", a: "Yes, once downloaded, the model is cached in browser storage for instant subsequent startups." }
         ]
       },
       {
@@ -720,11 +720,11 @@ export const categories = [
         icon: "CheckCheck",
         shortDescription: "Detect spelling errors, typos, and improve sentence clarity.",
         longDescription: "Proofread essays, emails, and articles with client-side linguistic rules and neural suggestion models without subscription paywalls.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
           { q: "Does this send my personal writing to third parties?", a: "No, all spellcheck and grammar rules execute locally in your browser sandbox." },
-          { q: "Can it suggest improvements for tone and vocabulary?", a: "Yes, suggestions for passive voice, wordiness, and confusing phrasing will be provided." },
-          { q: "Can I accept or reject suggestions with one click?", a: "Yes, interactive cards allow you to accept or discard edits individually." },
+          { q: "Can it suggest improvements for tone and vocabulary?", a: "Yes, suggestions for typos, double spaces, capitalization, and deep AI fluency rewrites are supported." },
+          { q: "Can I accept or reject suggestions with one click?", a: "Yes, interactive cards allow you to accept, dismiss, or accept all edits with one click." },
           { q: "Does it check punctuation and capitalization?", a: "Yes, misplaced commas, apostrophes, and capitalization errors are highlighted." },
           { q: "Is it completely free with no daily limits?", a: "Yes, ToolGenie provides unlimited free usage for everyone." }
         ]
@@ -735,13 +735,13 @@ export const categories = [
         icon: "Wand2",
         shortDescription: "Erase photo backgrounds automatically with edge-aware AI masks.",
         longDescription: "Isolate people, products, and vehicles from backgrounds to create transparent PNG cutouts in seconds using in-browser segmentation models.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
           { q: "How accurate is the client-side background removal?", a: "Trained vision models segment fine hair strands and complex product contours with crisp precision." },
           { q: "Does the output have a transparent background?", a: "Yes, downloads are exported as transparent PNGs ready for e-commerce and graphic design." },
-          { q: "Can I replace the background with a solid color or custom photo?", a: "Yes, select clean white for Amazon/eBay listings or upload your own backdrop." },
-          { q: "Are high-resolution photos supported?", a: "Yes, photos up to 4K resolution can be processed via WebGPU acceleration." },
-          { q: "Are my photos uploaded to an AI cloud server?", a: "Never. All AI vision tensors run directly on your computer's graphics hardware." }
+          { q: "Can I preview against different backdrops?", a: "Yes, preview cutouts on checkerboard, pure white, dark slate, or custom color backgrounds." },
+          { q: "Are high-resolution photos supported?", a: "Yes, photos up to 4K resolution can be processed via client-side acceleration." },
+          { q: "Are my photos uploaded to an AI cloud server?", a: "Never. All AI vision tensors run directly on your computer's local hardware in a Web Worker." }
         ]
       },
       {
@@ -750,13 +750,13 @@ export const categories = [
         icon: "ScanText",
         shortDescription: "Extract text from photos, scans, receipts, and screenshots.",
         longDescription: "Optical Character Recognition (OCR) powered by Tesseract WebAssembly. Convert flattened images and scanned documents into copyable text.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
           { q: "What is OCR?", a: "Optical Character Recognition translates pixels of text into editable, searchable digital characters." },
-          { q: "Can it recognize text from smartphone screenshots and receipts?", a: "Yes, screenshots, photographed book pages, receipts, and signs are recognized." },
-          { q: "How many languages can it recognize?", a: "Over 60 languages will be downloadable on-demand as local offline language packs." },
+          { q: "Can it recognize text from smartphone screenshots and receipts?", a: "Yes, screenshots, photographed book pages, receipts, invoices, and signs are recognized." },
+          { q: "How many languages can it recognize?", a: "Multiple languages including English, Spanish, French, German, Chinese, and Japanese are supported." },
           { q: "Can I copy the recognized text to clipboard or export as TXT?", a: "Yes, copy with a single click or download as a formatted plain text file." },
-          { q: "Does OCR require uploading sensitive documents?", a: "No, Tesseract runs natively inside your browser tab via WebAssembly." }
+          { q: "Does OCR require uploading sensitive documents?", a: "No, Tesseract runs natively inside your browser tab via an off-thread Web Worker." }
         ]
       }
     ]

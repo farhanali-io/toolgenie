@@ -56,6 +56,21 @@ const AudioCompressorWidget = lazy(() => import('./audio/AudioCompressorWidget')
 const ChangeVolumeWidget = lazy(() => import('./audio/ChangeVolumeWidget').then(m => ({ default: m.default || m.ChangeVolumeWidget })));
 const AudioMetadataEditorWidget = lazy(() => import('./audio/AudioMetadataEditorWidget').then(m => ({ default: m.default || m.AudioMetadataEditorWidget })));
 
+// Video Tools
+const TrimVideoWidget = lazy(() => import('./video/TrimVideoWidget').then(m => ({ default: m.default || m.TrimVideoWidget })));
+const CompressVideoWidget = lazy(() => import('./video/CompressVideoWidget').then(m => ({ default: m.default || m.CompressVideoWidget })));
+const VideoToGifWidget = lazy(() => import('./video/VideoToGifWidget').then(m => ({ default: m.default || m.VideoToGifWidget })));
+const ExtractAudioWidget = lazy(() => import('./video/ExtractAudioWidget').then(m => ({ default: m.default || m.ExtractAudioWidget })));
+const MuteVideoWidget = lazy(() => import('./video/MuteVideoWidget').then(m => ({ default: m.default || m.MuteVideoWidget })));
+const ResizeVideoWidget = lazy(() => import('./video/ResizeVideoWidget').then(m => ({ default: m.default || m.ResizeVideoWidget })));
+const ConvertVideoFormatWidget = lazy(() => import('./video/ConvertVideoFormatWidget').then(m => ({ default: m.default || m.ConvertVideoFormatWidget })));
+
+// AI Tools
+const TextSummarizerWidget = lazy(() => import('./ai/TextSummarizerWidget').then(m => ({ default: m.default || m.TextSummarizerWidget })));
+const GrammarCheckerWidget = lazy(() => import('./ai/GrammarCheckerWidget').then(m => ({ default: m.default || m.GrammarCheckerWidget })));
+const BackgroundRemoverWidget = lazy(() => import('./ai/BackgroundRemoverWidget').then(m => ({ default: m.default || m.BackgroundRemoverWidget })));
+const ImageToTextOcrWidget = lazy(() => import('./ai/ImageToTextOcrWidget').then(m => ({ default: m.default || m.ImageToTextOcrWidget })));
+
 interface ToolWidgetDispatcherProps {
   toolSlug: string;
   categorySlug: string;
@@ -103,6 +118,19 @@ const IMPLEMENTED_TOOL_SLUGS = new Set([
   'audio-compressor',
   'change-volume',
   'audio-metadata-editor',
+  // Video Tools (7)
+  'trim-video',
+  'compress-video',
+  'video-to-gif',
+  'extract-audio',
+  'mute-video',
+  'resize-video',
+  'convert-video-format',
+  // AI Tools (4)
+  'text-summarizer',
+  'grammar-checker',
+  'background-remover',
+  'image-to-text-ocr',
 ]);
 
 export const hasToolWidget = (slug: string): boolean => {
@@ -193,6 +221,32 @@ export const ToolWidgetDispatcher: React.FC<ToolWidgetDispatcherProps> = ({ tool
         return <ChangeVolumeWidget />;
       case 'audio-metadata-editor':
         return <AudioMetadataEditorWidget />;
+
+      // Video Tools
+      case 'trim-video':
+        return <TrimVideoWidget />;
+      case 'compress-video':
+        return <CompressVideoWidget />;
+      case 'video-to-gif':
+        return <VideoToGifWidget />;
+      case 'extract-audio':
+        return <ExtractAudioWidget />;
+      case 'mute-video':
+        return <MuteVideoWidget />;
+      case 'resize-video':
+        return <ResizeVideoWidget />;
+      case 'convert-video-format':
+        return <ConvertVideoFormatWidget />;
+
+      // AI Tools
+      case 'text-summarizer':
+        return <TextSummarizerWidget />;
+      case 'grammar-checker':
+        return <GrammarCheckerWidget />;
+      case 'background-remover':
+        return <BackgroundRemoverWidget />;
+      case 'image-to-text-ocr':
+        return <ImageToTextOcrWidget />;
 
       default:
         return null;

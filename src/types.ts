@@ -42,3 +42,4 @@ export interface ThemeConfig {
   bgSample: string;
   description: string;
 }
+

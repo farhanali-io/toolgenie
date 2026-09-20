@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { isWebCodecsSupported, isWebAudioSupported } from '../../../utils/audioHelpers';
+import { isWebCodecsVideoSupported } from '../../../utils/videoEngine';
 import { Cpu, AlertTriangle, CheckCircle2, X } from 'lucide-react';
 
 interface BrowserCapabilityNoticeProps {
   toolName?: string;
   requireWebCodecs?: boolean;
+  isVideo?: boolean;
 }
 
 export const BrowserCapabilityNotice: React.FC<BrowserCapabilityNoticeProps> = ({
-  toolName = 'Audio Tool',
+  toolName = 'Media Tool',
   requireWebCodecs = false,
+  isVideo = false,
 }) => {
   const [hasWebCodecs, setHasWebCodecs] = useState<boolean | null>(null);
   const [hasWebAudio, setHasWebAudio] = useState<boolean | null>(null);
   const [dismissed, setDismissed] = useState<boolean>(false);
 
   useEffect(() => {
-    setHasWebCodecs(isWebCodecsSupported());
+    const supported = isVideo ? isWebCodecsVideoSupported() : isWebCodecsSupported();
+    setHasWebCodecs(supported);
     setHasWebAudio(isWebAudioSupported());
-  }, []);
+  }, [isVideo]);
 
   if (dismissed || hasWebCodecs === null) return null;
 
-  // If WebCodecs is required by the tool (like audio-converter, audio-compressor) and missing
+  // If WebCodecs is required by the tool and missing in current browser
   if (requireWebCodecs && !hasWebCodecs) {
     return (
       <div 
@@ -38,8 +42,18 @@ export const BrowserCapabilityNotice: React.FC<BrowserCapabilityNoticeProps> = (
             Browser Notice: Hardware WebCodecs Unavailable
           </p>
           <p style={{ color: 'var(--text-secondary)' }} className="leading-relaxed">
-            Your current browser does not natively expose the high-speed WebCodecs Audio API. 
-            {toolName} will seamlessly utilize the Web Audio API and client-side fallback encoder, which may process slightly slower on large audio files.
+            {isVideo ? (
+              <>
+                Your browser does not natively expose the hardware-accelerated WebCodecs Video API.
+                {toolName} will attempt client-side software decoding where supported.
+                For legacy environments, an ffmpeg.wasm fallback engine may be utilized (~30 MB one-time download).
+              </>
+            ) : (
+              <>
+                Your current browser does not natively expose the high-speed WebCodecs Audio API. 
+                {toolName} will utilize the Web Audio API and client-side fallback encoder.
+              </>
+            )}
           </p>
         </div>
         <button 
@@ -78,3 +92,4 @@ export const BrowserCapabilityNotice: React.FC<BrowserCapabilityNoticeProps> = (
     </div>
   );
 };
+
