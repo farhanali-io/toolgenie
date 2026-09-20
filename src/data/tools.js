@@ -513,7 +513,7 @@ export const categories = [
     name: "Audio Tools",
     slug: "audio-tools",
     accentColor: "#06b6d4",
-    status: "coming-soon",
+    status: "live",
     description: "Edit, convert, and polish audio recordings and music files locally.",
     tools: [
       {
@@ -522,7 +522,7 @@ export const categories = [
         icon: "Scissors",
         shortDescription: "Cut music, voice notes, and sound effects with an interactive waveform.",
         longDescription: "Trim MP3, WAV, M4A, and OGG audio with an interactive audio waveform visualizer and millisecond-accurate cue points.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
           { q: "Can I see an interactive waveform of my track?", a: "Yes, a visual waveform displays peaks and valleys for precision clipping." },
           { q: "Does it support fade-in and fade-out effects?", a: "Yes, customizable fade-in and fade-out curves prevent abrupt audio clipping." },
@@ -537,7 +537,7 @@ export const categories = [
         icon: "Repeat",
         shortDescription: "Transcode between MP3, WAV, AAC, FLAC, OGG, and M4A formats.",
         longDescription: "Convert audio formats quickly and seamlessly. Turn lossless FLAC or WAV recordings into compact MP3 or modern AAC files.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
           { q: "What audio formats will be supported?", a: "MP3, WAV, AAC, M4A, FLAC, OGG, and OPUS formats." },
           { q: "Can I adjust the audio bitrate?", a: "Yes, choose bitrates from 64 kbps up to 320 kbps, or uncompressed 24-bit WAV." },
@@ -552,7 +552,7 @@ export const categories = [
         icon: "Layers",
         shortDescription: "Shrink podcast and audio file sizes while keeping voices clear.",
         longDescription: "Optimize voice and music files to meet email attachment caps or storage limits by tuning bitrates, channels, and sample rates.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
           { q: "How much can audio file size be reduced?", a: "Uncompressed WAV or high-bitrate audio can often be reduced by 70% to 90%." },
           { q: "Can I convert stereo audio to mono to save space?", a: "Yes, merging stereo into mono is an effective way to cut voice podcast sizes in half." },
@@ -567,7 +567,7 @@ export const categories = [
         icon: "Volume2",
         shortDescription: "Boost quiet recordings or normalize loud audio tracks.",
         longDescription: "Increase volume on quiet voice notes or reduce clipping distortion on loud tracks with intelligent gain adjustments and normalization.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
           { q: "Can I amplify quiet speech recordings?", a: "Yes, boost volume up to 200% or 300% with automatic peak limiting to prevent distortion." },
           { q: "What is audio normalization?", a: "Normalization scales the loudest sound to 0 dBFS so tracks play at consistent, comfortable volumes." },
@@ -582,7 +582,7 @@ export const categories = [
         icon: "FileEdit",
         shortDescription: "View and edit ID3 tags, artist names, album art, and track numbers.",
         longDescription: "Organize your music library by editing ID3 tags on MP3, FLAC, and M4A files directly in your browser without desktop taggers.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
           { q: "Which ID3 tags can I edit?", a: "Song title, artist, album, genre, year, track number, composer, and comments." },
           { q: "Can I embed album cover art?", a: "Yes, upload and embed custom JPG or PNG artwork directly into the audio file." },
@@ -597,7 +597,7 @@ export const categories = [
     name: "Converter Tools",
     slug: "converter-tools",
     accentColor: "#6366f1",
-    status: "coming-soon",
+    status: "live",
     description: "Seamlessly translate formats between structured data, markup, documents, and units.",
     tools: [
       {
@@ -606,7 +606,7 @@ export const categories = [
         icon: "FileImage",
         shortDescription: "Convert Apple iPhone HEIC/HEIF photos to universal JPG format.",
         longDescription: "Unlock modern iOS photos for Windows, Android, and web platforms. Convert Apple HEIC and HEIF files into high-quality JPEG images instantly.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
           { q: "What is a HEIC file?", a: "HEIC (High Efficiency Image Container) is the default image format used by modern iPhones for smaller photo sizes." },
           { q: "Why do I need to convert HEIC to JPG?", a: "Many Windows apps, older websites, and printing services do not support HEIC files natively." },
@@ -621,7 +621,7 @@ export const categories = [
         icon: "FileSpreadsheet",
         shortDescription: "Transform spreadsheet CSV rows into formatted JSON arrays or objects.",
         longDescription: "Parse comma-separated values (CSV) into structured JSON with automatic header detection, type inference for numbers and booleans, and custom delimiters.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
           { q: "Does it detect headers automatically from the first row?", a: "Yes, column headers are turned into JSON object keys automatically." },
           { q: "Can it infer numbers and boolean types instead of strings?", a: "Yes, a type-inference toggle parses `123` as numbers and `true/false` as booleans." },
@@ -636,7 +636,7 @@ export const categories = [
         icon: "Table",
         shortDescription: "Flatten JSON arrays into spreadsheet-ready CSV or Excel files.",
         longDescription: "Convert complex JSON responses and nested structures into clean, tabular CSV files ready to open in Microsoft Excel, Google Sheets, or Numbers.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
           { q: "Can it handle nested JSON objects and arrays?", a: "Yes, nested properties are flattened into dot-notation columns (e.g. `user.address.city`)." },
           { q: "Does it properly escape quotes and commas in strings?", a: "Yes, standard RFC 4180 compliance ensures fields containing commas are safely quoted." },
@@ -651,7 +651,7 @@ export const categories = [
         icon: "FileCode",
         shortDescription: "Render CommonMark and GitHub Flavored Markdown into clean HTML.",
         longDescription: "Convert READMEs, notes, and documentation from Markdown syntax into semantic, accessible HTML with syntax-highlighted code blocks.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
           { q: "Does it support GitHub Flavored Markdown (GFM)?", a: "Yes, tables, task lists, strikethrough, and autolinks are fully supported." },
           { q: "Can I view a live preview alongside the HTML code?", a: "Yes, a split-screen editor provides real-time rendered previews alongside the raw HTML markup." },
@@ -666,7 +666,7 @@ export const categories = [
         icon: "FileText",
         shortDescription: "Convert web page HTML markup into clean, readable Markdown syntax.",
         longDescription: "Strip excessive HTML tags and inline styles, converting web articles and documentation into lightweight, clean Markdown for blogs and GitHub.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
           { q: "Can I paste HTML copied from websites or rich-text editors?", a: "Yes, paste raw HTML or formatted text directly into the input area." },
           { q: "How are tables and lists converted?", a: "Tables convert to clean ASCII Markdown tables, and unordered/ordered lists are preserved." },
@@ -681,7 +681,7 @@ export const categories = [
         icon: "Calculator",
         shortDescription: "Convert length, weight, temperature, data storage, speed, and area.",
         longDescription: "High-precision physical and digital unit conversions across metric and imperial systems with instantaneous real-time recalculations.",
-        status: "coming-soon",
+        status: "live",
         faqs: [
           { q: "Which unit categories can I convert?", a: "Length, Weight/Mass, Temperature, Digital Storage (KB, MB, GB, TB), Speed, Area, Volume, and Time." },
           { q: "Does it support both metric and imperial measurements?", a: "Yes, convert seamlessly between meters/feet, kilograms/pounds, Celsius/Fahrenheit, and more." },
