@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { ShieldCheck, Lock, CheckCircle2, ArrowLeft } from 'lucide-react';
+---
+
+<Layout
+  title="Privacy Policy — ToolGenie"
+  description="Read ToolGenie's Privacy Policy. We operate a 100% client-side architecture where your files are never transmitted to or stored on any server."
+  canonicalUrl="https://toolgenie.online/privacy-policy"
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <div class="mb-8">
+      <a 
+        href="/" 
+        class="inline-flex items-center gap-1.5 text-xs font-semibold hover:underline"
+        style={{ color: 'var(--accent)' }}
+      >
+        <ArrowLeft size={14} />
+        <span>Back to All Tools</span>
+      </a>
+    </div>
+
+    {/* Header */}
+    <div class="border-b pb-8 mb-10" style={{ borderColor: 'var(--border-subtle)' }}>
+      <div 
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-4 border"
+        style={{
+          backgroundColor: 'var(--bg-surface)',
+          borderColor: 'var(--border-subtle)',
+          color: 'var(--accent)'
+        }}
+      >
+        <ShieldCheck size={14} />
+        <span>Privacy First</span>
+      </div>
+      <h1 
+        class="font-heading text-4xl sm:text-5xl font-extrabold tracking-tight mb-4"
+        style={{ color: 'var(--text-primary)' }}
+      >
+        Privacy Policy
+      </h1>
+      <p class="text-sm font-medium" style={{ color: 'var(--text-muted)' }}>
+        Last updated: February 2026
+      </p>
+    </div>
+
+    {/* Content */}
+    <div class="space-y-8 text-sm sm:text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+      {/* Privacy Guarantee Box */}
+      <div 
+        class="rounded-2xl p-6 border flex items-start gap-4"
+        style={{
+          backgroundColor: 'var(--bg-surface)',
+          borderColor: 'var(--border-subtle)'
+        }}
+      >
+        <Lock size={24} class="shrink-0 mt-1" style={{ color: 'var(--accent)' }} />
+        <div>
+          <h2 class="font-heading text-lg font-bold mb-1" style={{ color: 'var(--text-primary)' }}>
+            The ToolGenie Privacy Guarantee
+          </h2>
+          <p class="text-sm leading-relaxed">
+            Your files never leave your device. All file conversions, compressions, cryptographic calculations, and media operations execute entirely in your local browser sandbox.
+          </p>
+        </div>
+      </div>
+
+      <section class="space-y-3">
+        <h2 class="font-heading text-xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+          1. Zero Server-Side File Processing
+        </h2>
+        <p>
+          ToolGenie operates on a &ldquo;Browser-as-a-Processor&rdquo; paradigm. When you drop a PDF, image, video, audio track, or code file into any of our tools:
+        </p>
+        <ul class="space-y-2 list-none pl-1">
+          {[
+            'The file is read locally using the browser File API into your device RAM.',
+            'Algorithms (compiled in WebAssembly, WebCodecs, or JavaScript) process the data in-memory.',
+            'Output files are compiled directly into a local Blob URL for you to save.',
+            'No byte of your file content is ever transmitted over the network to ToolGenie or any third-party server.'
+          ].map((item) => (
+            <li class="flex items-start gap-2 text-sm">
+              <CheckCircle2 size={16} class="text-emerald-500 shrink-0 mt-0.5" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="font-heading text-xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+          2. Information We Do Not Collect
+        </h2>
+        <p>
+          Because we do not use server-side processing for tools:
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5 text-sm">
+          <li>We do NOT store or inspect uploaded documents, images, or files.</li>
+          <li>We do NOT maintain user accounts or require sign-in or passwords.</li>
+          <li>We do NOT collect credit card numbers, billing addresses, or payment information.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="font-heading text-xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+          3. Local Storage and Client Preferences
+        </h2>
+        <p>
+          We utilize your browser&apos;s standard <code>localStorage</code> API solely to preserve your preferred user interface settings:
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5 text-sm">
+          <li><code>toolgenie-theme</code>: Stores your selected color scheme (e.g. Light, Dark, Midnight Blue, Emerald, etc.) so that the interface loads seamlessly without screen flicker.</li>
+        </ul>
+        <p class="text-xs">
+          This data remains exclusively on your machine and is never sent to our servers. You can clear it at any time through your browser settings.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="font-heading text-xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+          4. Website Analytics
+        </h2>
+        <p>
+          We employ standard web analytics (Google Analytics) solely to understand aggregated, non-personally identifiable site usage (such as total page visits, popular categories, and generic browser types). These metrics help us identify which tools to build next and improve site performance. Google Analytics does not have access to your local files or documents.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="font-heading text-xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+          5. Contact Us
+        </h2>
+        <p>
+          If you have any questions or security audits regarding our privacy practices, contact us at:
+        </p>
+        <p>
+          <a href="mailto:farhanaly.io3@gmail.com" class="font-bold hover:underline" style={{ color: 'var(--accent)' }}>
+            farhanaly.io3@gmail.com
+          </a>
+        </p>
+      </section>
+    </div>
+  </div>
+</Layout>

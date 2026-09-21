@@ -6,11 +6,19 @@ import { Link } from '../utils/router';
 import { Flame } from 'lucide-react';
 
 interface PopularStripProps {
-  onSelectTool: (tool: ToolItem) => void;
+  onSelectTool?: (tool: ToolItem) => void;
 }
 
 export const PopularStrip: React.FC<PopularStripProps> = ({ onSelectTool }) => {
   const popularTools = (getPopularTools() as ToolItem[]).filter(Boolean);
+
+  const handleSelect = (tool: ToolItem) => {
+    if (onSelectTool) {
+      onSelectTool(tool);
+    } else {
+      window.location.href = `/${tool.categorySlug}/${tool.slug}`;
+    }
+  };
 
   return (
     <section 
@@ -45,7 +53,7 @@ export const PopularStrip: React.FC<PopularStripProps> = ({ onSelectTool }) => {
               tool={tool}
               categoryAccentColor={tool.categoryAccentColor}
               categoryName={tool.categoryName}
-              onClick={onSelectTool}
+              onClick={handleSelect}
             />
           </Link>
         ))}

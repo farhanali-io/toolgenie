@@ -5,8 +5,8 @@ import { ToolItem } from '../types';
 import { DynamicIcon } from './DynamicIcon';
 
 interface HeroProps {
-  onSelectTool: (tool: ToolItem) => void;
-  searchInputRef: React.RefObject<HTMLInputElement | null>;
+  onSelectTool?: (tool: ToolItem) => void;
+  searchInputRef?: React.RefObject<HTMLInputElement | null>;
 }
 
 export const Hero: React.FC<HeroProps> = ({ onSelectTool, searchInputRef }) => {
@@ -15,6 +15,16 @@ export const Hero: React.FC<HeroProps> = ({ onSelectTool, searchInputRef }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const allTools: ToolItem[] = getAllTools() as ToolItem[];
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const internalRef = useRef<HTMLInputElement | null>(null);
+  const activeInputRef = searchInputRef || internalRef;
+
+  const handleSelect = (tool: ToolItem) => {
+    if (onSelectTool) {
+      onSelectTool(tool);
+    } else {
+      window.location.href = `/${tool.categorySlug}/${tool.slug}`;
+    }
+  };
 
   // Live filter matching tools
   const filteredTools = searchQuery.trim()
@@ -47,7 +57,7 @@ export const Hero: React.FC<HeroProps> = ({ onSelectTool, searchInputRef }) => {
     } else if (e.key === 'Enter') {
       e.preventDefault();
       if (filteredTools[selectedIndex]) {
-        onSelectTool(filteredTools[selectedIndex]);
+        handleSelect(filteredTools[selectedIndex]);
         setSearchQuery('');
         setIsFocused(false);
       }
@@ -58,8 +68,8 @@ export const Hero: React.FC<HeroProps> = ({ onSelectTool, searchInputRef }) => {
 
   const clearSearch = () => {
     setSearchQuery('');
-    if (searchInputRef.current) {
-      searchInputRef.current.focus();
+    if (activeInputRef.current) {
+      activeInputRef.current.focus();
     }
   };
 
@@ -128,7 +138,7 @@ export const Hero: React.FC<HeroProps> = ({ onSelectTool, searchInputRef }) => {
 
           <input
             id="hero-search-input"
-            ref={searchInputRef}
+            ref={activeInputRef}
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -207,7 +217,7 @@ export const Hero: React.FC<HeroProps> = ({ onSelectTool, searchInputRef }) => {
                       type="button"
                       onMouseDown={(e) => {
                         e.preventDefault();
-                        onSelectTool(tool);
+                        handleSelect(tool);
                         setSearchQuery('');
                         setIsFocused(false);
                       }}
@@ -276,8 +286,8 @@ export const Hero: React.FC<HeroProps> = ({ onSelectTool, searchInputRef }) => {
             type="button"
             onClick={() => {
               setSearchQuery(item);
-              if (searchInputRef.current) {
-                searchInputRef.current.focus();
+              if (activeInputRef.current) {
+                activeInputRef.current.focus();
               }
             }}
             className="px-2.5 py-1 rounded-lg border hover:opacity-80 transition-colors"

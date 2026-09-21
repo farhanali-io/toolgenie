@@ -1,0 +1,407 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { categories } from '../../data/tools';
+import { ToolWidgetDispatcher } from '../../components/tools/ToolWidgetDispatcher';
+import { DynamicIcon } from '../../components/DynamicIcon';
+import { ToolCard } from '../../components/ToolCard';
+import { getToolHowToSteps } from '../../utils/toolSteps';
+import { 
+  ChevronRight, 
+  ShieldCheck, 
+  Zap, 
+  Sparkles, 
+  CheckCircle2, 
+  HelpCircle, 
+  Lock,
+  ArrowRight
+} from 'lucide-react';
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const cat of categories) {
+    for (const tool of cat.tools) {
+      paths.push({
+        params: { category: cat.slug, tool: tool.slug },
+        props: { category: cat, tool: tool }
+      });
+    }
+  }
+  return paths;
+}
+
+const { category, tool } = Astro.props;
+const isLive = tool.status === 'live';
+const howToSteps = getToolHowToSteps(tool);
+
+const pageTitle = `${tool.name} — Free 100% Client-Side Tool | ToolGenie`;
+const pageDescription = tool.longDescription || tool.shortDescription;
+const canonicalUrl = `https://toolgenie.online/${category.slug}/${tool.slug}`;
+
+// Related tools from same category (excluding current tool)
+const relatedTools = category.tools
+  .filter((t) => t.slug !== tool.slug)
+  .slice(0, 4);
+
+// Breadcrumbs Schema
+const breadcrumbsSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://toolgenie.online'
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: category.name,
+      item: `https://toolgenie.online/${category.slug}`
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: tool.name,
+      item: canonicalUrl
+    }
+  ]
+};
+
+// FAQ Schema
+const faqSchema = tool.faqs && tool.faqs.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: tool.faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a
+    }
+  }))
+} : null;
+
+// WebApplication Schema
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: tool.name,
+  description: tool.shortDescription,
+  url: canonicalUrl,
+  applicationCategory: 'UtilitiesApplication',
+  operatingSystem: 'All',
+  browserRequirements: 'Requires JavaScript. Requires HTML5.',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD'
+  }
+};
+
+const combinedJsonLd = [breadcrumbsSchema, appSchema, ...(faqSchema ? [faqSchema] : [])];
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  jsonLd={combinedJsonLd}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    {/* Breadcrumbs */}
+    <nav class="flex items-center gap-2 text-xs font-medium mb-6 flex-wrap" aria-label="Breadcrumbs" style={{ color: 'var(--text-muted)' }}>
+      <a href="/" class="hover:underline hover:text-[var(--accent)] transition-colors">Home</a>
+      <ChevronRight size={13} />
+      <a href={`/${category.slug}`} class="hover:underline hover:text-[var(--accent)] transition-colors">{category.name}</a>
+      <ChevronRight size={13} />
+      <span class="font-semibold" style={{ color: 'var(--text-primary)' }}>{tool.name}</span>
+    </nav>
+
+    {/* Tool Header */}
+    <div class="mb-8 max-w-4xl">
+      <div class="flex items-center gap-3 mb-3">
+        <div 
+          class="w-12 h-12 rounded-2xl flex items-center justify-center border shrink-0"
+          style={{
+            backgroundColor: 'var(--bg-surface)',
+            borderColor: 'var(--border-subtle)',
+            color: category.accentColor
+          }}
+        >
+          <DynamicIcon name={tool.icon} size={26} />
+        </div>
+
+        <div>
+          <div class="flex items-center gap-2">
+            <a 
+              href={`/${category.slug}`}
+              class="text-xs font-semibold uppercase tracking-wider hover:underline"
+              style={{ color: category.accentColor }}
+            >
+              {category.name}
+            </a>
+            <span class="text-xs" style={{ color: 'var(--text-muted)' }}>•</span>
+            <span 
+              class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full font-bold inline-flex items-center gap-1"
+              style={{
+                backgroundColor: isLive ? 'var(--badge-live-bg)' : 'var(--badge-soon-bg)',
+                color: isLive ? 'var(--badge-live-text)' : 'var(--badge-soon-text)'
+              }}
+            >
+              {isLive && <span class="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />}
+              {isLive ? 'LIVE' : 'COMING SOON'}
+            </span>
+          </div>
+
+          <h1 
+            class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight"
+            style={{ color: 'var(--text-primary)' }}
+          >
+            {tool.name}
+          </h1>
+        </div>
+      </div>
+
+      <p 
+        class="text-sm sm:text-base leading-relaxed"
+        style={{ color: 'var(--text-secondary)' }}
+      >
+        {tool.longDescription || tool.shortDescription}
+      </p>
+
+      {/* Security Banner Badge */}
+      <div 
+        class="inline-flex items-center gap-2 mt-4 px-3.5 py-1.5 rounded-xl border text-xs font-semibold"
+        style={{
+          backgroundColor: 'var(--bg-surface)',
+          borderColor: 'var(--border-subtle)',
+          color: 'var(--text-secondary)'
+        }}
+      >
+        <ShieldCheck size={15} style={{ color: 'var(--accent)' }} />
+        <span>100% Client-Side Engine</span>
+        <span class="w-1 h-1 rounded-full bg-current opacity-40" />
+        <span>Your files never leave your browser</span>
+      </div>
+    </div>
+
+    {/* Tool Workspace Island */}
+    <div id="tool-workspace-container" class="mb-16">
+      {isLive ? (
+        <div 
+          class="rounded-3xl border shadow-xs overflow-hidden"
+          style={{
+            backgroundColor: 'var(--bg-surface)',
+            borderColor: 'var(--border-subtle)'
+          }}
+        >
+          <ToolWidgetDispatcher 
+            client:load 
+            toolSlug={tool.slug} 
+            categorySlug={category.slug} 
+          />
+        </div>
+      ) : (
+        <div 
+          class="rounded-3xl border p-8 sm:p-12 text-center"
+          style={{
+            backgroundColor: 'var(--bg-surface)',
+            borderColor: 'var(--border-subtle)'
+          }}
+        >
+          <div 
+            class="w-16 h-16 rounded-2xl mx-auto flex items-center justify-center mb-4 border"
+            style={{
+              backgroundColor: 'var(--bg-input)',
+              borderColor: 'var(--border-subtle)',
+              color: category.accentColor
+            }}
+          >
+            <Sparkles size={30} />
+          </div>
+          <h2 class="font-heading text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+            {tool.name} is In Active Development
+          </h2>
+          <p class="text-sm max-w-md mx-auto mb-6" style={{ color: 'var(--text-secondary)' }}>
+            Our team is currently engineering this tool to execute 100% client-side with native WebAssembly performance and zero file uploads.
+          </p>
+          <a
+            href={`/${category.slug}`}
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-xs transition-opacity hover:opacity-90"
+            style={{
+              backgroundColor: 'var(--accent)',
+              color: 'var(--accent-contrast)'
+            }}
+          >
+            <span>Explore Other {category.name}</span>
+            <ArrowRight size={14} />
+          </a>
+        </div>
+      )}
+    </div>
+
+    {/* How To Use Steps Section */}
+    {howToSteps && howToSteps.length > 0 && (
+      <section class="mb-16">
+        <div class="mb-6">
+          <span class="text-xs font-mono font-bold uppercase tracking-wider" style={{ color: 'var(--accent)' }}>
+            Step-by-Step Guide
+          </span>
+          <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight mt-1" style={{ color: 'var(--text-primary)' }}>
+            How to Use {tool.name}
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {howToSteps.map((step) => (
+            <div 
+              class="rounded-2xl border p-6 flex flex-col justify-between"
+              style={{
+                backgroundColor: 'var(--bg-surface)',
+                borderColor: 'var(--border-subtle)'
+              }}
+            >
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span 
+                    class="w-8 h-8 rounded-lg flex items-center justify-center font-mono font-bold text-xs"
+                    style={{
+                      backgroundColor: 'var(--bg-input)',
+                      color: category.accentColor
+                    }}
+                  >
+                    0{step.step}
+                  </span>
+                </div>
+                <h3 class="font-heading text-base font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+                  {step.title}
+                </h3>
+                <p class="text-xs sm:text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                  {step.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {/* Why Use ToolGenie For This - Privacy & Speed Callout */}
+    <section 
+      class="rounded-3xl border p-6 sm:p-8 mb-16"
+      style={{
+        backgroundColor: 'var(--bg-surface)',
+        borderColor: 'var(--border-subtle)'
+      }}
+    >
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--accent)' }}>
+          <Lock size={14} />
+          <span>Security &amp; Performance</span>
+        </div>
+        <h2 class="font-heading text-xl sm:text-2xl font-bold tracking-tight mb-3" style={{ color: 'var(--text-primary)' }}>
+          Why use ToolGenie for {tool.name}?
+        </h2>
+        <p class="text-xs sm:text-sm leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
+          Unlike traditional utility websites that upload your personal records, photos, and code snippets to remote cloud infrastructure, ToolGenie processes {tool.name} directly inside your browser tab using WebAssembly and hardware acceleration.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+          <div class="flex items-center gap-2 text-xs font-medium" style={{ color: 'var(--text-primary)' }}>
+            <CheckCircle2 size={16} class="text-emerald-500 shrink-0" />
+            <span>Zero server file uploads</span>
+          </div>
+          <div class="flex items-center gap-2 text-xs font-medium" style={{ color: 'var(--text-primary)' }}>
+            <CheckCircle2 size={16} class="text-emerald-500 shrink-0" />
+            <span>No data retention or logs</span>
+          </div>
+          <div class="flex items-center gap-2 text-xs font-medium" style={{ color: 'var(--text-primary)' }}>
+            <CheckCircle2 size={16} class="text-emerald-500 shrink-0" />
+            <span>Unlimited free conversions</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Frequently Asked Questions */}
+    {tool.faqs && tool.faqs.length > 0 && (
+      <section class="mb-16">
+        <div class="mb-6">
+          <span class="text-xs font-mono font-bold uppercase tracking-wider" style={{ color: 'var(--accent)' }}>
+            Common Questions
+          </span>
+          <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight mt-1" style={{ color: 'var(--text-primary)' }}>
+            Frequently Asked Questions
+          </h2>
+        </div>
+
+        <div class="space-y-3">
+          {tool.faqs.map((faq, idx) => (
+            <details 
+              class="rounded-2xl border p-5 group transition-all"
+              style={{
+                backgroundColor: 'var(--bg-surface)',
+                borderColor: 'var(--border-subtle)'
+              }}
+            >
+              <summary class="flex items-center justify-between cursor-pointer font-heading font-semibold text-sm sm:text-base list-none select-none" style={{ color: 'var(--text-primary)' }}>
+                <span class="pr-4">{faq.q}</span>
+                <span class="text-xs font-mono transition-transform duration-200 group-open:rotate-180" style={{ color: 'var(--text-muted)' }}>
+                  ▼
+                </span>
+              </summary>
+              <p class="mt-3 pt-3 border-t text-xs sm:text-sm leading-relaxed" style={{ borderColor: 'var(--border-subtle)', color: 'var(--text-secondary)' }}>
+                {faq.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {/* Related Tools Strip */}
+    {relatedTools.length > 0 && (
+      <section class="border-t pt-10" style={{ borderColor: 'var(--border-subtle)' }}>
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h2 class="font-heading text-xl sm:text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+              More {category.name}
+            </h2>
+            <p class="text-xs sm:text-sm mt-0.5" style={{ color: 'var(--text-secondary)' }}>
+              Explore other client-side utilities in this collection.
+            </p>
+          </div>
+          <a
+            href={`/${category.slug}`}
+            class="text-xs font-bold hover:underline"
+            style={{ color: category.accentColor }}
+          >
+            View All {category.tools.length} Tools →
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          {relatedTools.map((relTool) => (
+            <a
+              href={`/${category.slug}/${relTool.slug}`}
+              class="block focus:outline-none"
+            >
+              <ToolCard
+                client:idle
+                tool={{
+                  ...relTool,
+                  categoryName: category.name,
+                  categorySlug: category.slug,
+                  categoryAccentColor: category.accentColor
+                }}
+                categoryAccentColor={category.accentColor}
+                categoryName={category.name}
+                onClick={() => {}}
+              />
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+</Layout>

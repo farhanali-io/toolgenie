@@ -4,13 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "node scripts/generate-sitemap.js && vite build",
-    "preview": "vite preview",
-    "clean": "rm -rf dist server.js",
+    "dev": "astro dev --port 3000 --host 0.0.0.0",
+    "build": "astro build",
+    "preview": "astro preview --port 3000 --host 0.0.0.0",
+    "clean": "rm -rf dist",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^14.3.2",
+    "@astrojs/react": "^6.0.6",
+    "@astrojs/sitemap": "^3.7.4",
     "@google/genai": "^2.4.0",
     "@imgly/background-removal": "^1.7.0",
     "@tailwindcss/vite": "^4.3.3",
@@ -21,6 +24,7 @@
     "@types/turndown": "^5.0.6",
     "@vitejs/plugin-react": "^6.1.1",
     "@xenova/transformers": "^2.17.2",
+    "astro": "^7.3.3",
     "browser-id3-writer": "^6.4.0",
     "diff": "^9.0.0",
     "dompurify": "^3.4.15",

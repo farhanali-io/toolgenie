@@ -1,0 +1,101 @@
+---
+import '../styles/globals.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalUrl?: string;
+  ogType?: string;
+  jsonLd?: Record<string, any> | Array<Record<string, any>>;
+}
+
+const {
+  title = 'ToolGenie — Free Browser-Based Tools (100% Client-Side)',
+  description = 'Free online tools running 100% in your browser. No uploads, no signup, no limits. Your files never leave your device.',
+  canonicalUrl,
+  ogType = 'website',
+  jsonLd,
+} = Astro.props;
+
+const canonical = canonicalUrl || new URL(Astro.url.pathname, 'https://toolgenie.online').href;
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta name="google-site-verification" content="BlnB3RbyeogVHomajTEBsItzN1LaHylO7Eeaar5fYSs" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    {/* Open Graph & Social */}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="ToolGenie" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    {/* Google Fonts */}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+    {/* Structured Data JSON-LD */}
+    {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
+
+    {/* Global FOUC & Theme Initialization Script */}
+    <script is:inline>
+      (function() {
+        try {
+          var saved = localStorage.getItem('toolgenie-theme');
+          var theme = saved || 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+
+        // Defensive patch for fetch getters in third-party extensions
+        try {
+          var _origFetch = window.fetch;
+          var _currentFetch = _origFetch ? _origFetch.bind(window) : _origFetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() { return _currentFetch; },
+            set: function(fn) { _currentFetch = fn; },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {}
+      })();
+    </script>
+
+    {/* Google Analytics (gtag.js) */}
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-QZ20PWNYRM"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QZ20PWNYRM');
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col selection:bg-indigo-500/20 selection:text-indigo-600">
+    <Header />
+    <main class="grow">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

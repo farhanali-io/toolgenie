@@ -1,0 +1,197 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { categories } from '../../data/tools';
+import { ToolCard } from '../../components/ToolCard';
+import { categorySeoContent } from '../../data/categorySeo';
+import { ArrowLeft, ChevronRight, Sparkles, Layers, ShieldCheck } from 'lucide-react';
+
+export async function getStaticPaths() {
+  return categories.map((cat) => ({
+    params: { category: cat.slug },
+    props: { category: cat },
+  }));
+}
+
+const { category } = Astro.props;
+const seoData = categorySeoContent[category.slug];
+
+const pageTitle = seoData?.metaTitle || `${category.name} — Free 100% Client-Side Tools | ToolGenie`;
+const pageDescription = seoData?.metaDescription || category.description;
+const canonicalUrl = `https://toolgenie.online/${category.slug}`;
+
+const breadcrumbsSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://toolgenie.online'
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: category.name,
+      item: canonicalUrl
+    }
+  ]
+};
+
+const otherCategories = categories.filter((c) => c.slug !== category.slug);
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  jsonLd={breadcrumbsSchema}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    {/* Breadcrumbs */}
+    <nav class="flex items-center gap-2 text-xs font-medium mb-6" aria-label="Breadcrumbs" style={{ color: 'var(--text-muted)' }}>
+      <a href="/" class="hover:underline hover:text-[var(--accent)] transition-colors">Home</a>
+      <ChevronRight size={13} />
+      <span class="font-semibold" style={{ color: 'var(--text-primary)' }}>{category.name}</span>
+    </nav>
+
+    {/* Category Hero Header */}
+    <div 
+      class="rounded-3xl border p-6 sm:p-10 mb-10 relative overflow-hidden"
+      style={{
+        backgroundColor: 'var(--bg-surface)',
+        borderColor: 'var(--border-subtle)'
+      }}
+    >
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+        <div class="flex items-center gap-2.5">
+          <span class="w-3.5 h-3.5 rounded-full" style={{ backgroundColor: category.accentColor }} />
+          <span 
+            class="text-[11px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full"
+            style={{
+              backgroundColor: category.status === 'live' ? 'var(--badge-live-bg)' : 'var(--badge-soon-bg)',
+              color: category.status === 'live' ? 'var(--badge-live-text)' : 'var(--badge-soon-text)'
+            }}
+          >
+            {category.status === 'live' ? 'Ready to Use' : 'Coming Soon'}
+          </span>
+          <span class="text-xs font-mono" style={{ color: 'var(--text-muted)' }}>
+            {category.tools.length} Tools
+          </span>
+        </div>
+
+        <div class="inline-flex items-center gap-1.5 text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>
+          <ShieldCheck size={15} style={{ color: 'var(--accent)' }} />
+          <span>100% Client-Side Execution</span>
+        </div>
+      </div>
+
+      <h1 
+        class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4"
+        style={{ color: 'var(--text-primary)' }}
+      >
+        {seoData?.title || category.name}
+      </h1>
+
+      <p 
+        class="text-base sm:text-lg max-w-3xl leading-relaxed"
+        style={{ color: 'var(--text-secondary)' }}
+      >
+        {category.description}
+      </p>
+    </div>
+
+    {/* Tools Grid */}
+    <div class="mb-16">
+      <div class="flex items-center justify-between mb-6 pb-2 border-b" style={{ borderColor: 'var(--border-subtle)' }}>
+        <h2 class="font-heading text-xl sm:text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+          All {category.name}
+        </h2>
+        <span class="text-xs font-mono" style={{ color: 'var(--text-muted)' }}>
+          Showing {category.tools.length} tools
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
+        {category.tools.map((tool) => (
+          <a
+            href={`/${category.slug}/${tool.slug}`}
+            class="block focus:outline-none"
+          >
+            <ToolCard
+              client:idle
+              tool={{
+                ...tool,
+                categoryName: category.name,
+                categorySlug: category.slug,
+                categoryAccentColor: category.accentColor
+              }}
+              categoryAccentColor={category.accentColor}
+              categoryName={category.name}
+              onClick={() => {}}
+            />
+          </a>
+        ))}
+      </div>
+    </div>
+
+    {/* 150-250 Word SEO Content Block */}
+    {seoData && seoData.content && (
+      <div 
+        class="rounded-2xl border p-6 sm:p-8 mb-16"
+        style={{
+          backgroundColor: 'var(--bg-surface)',
+          borderColor: 'var(--border-subtle)'
+        }}
+      >
+        <h2 
+          class="font-heading text-xl sm:text-2xl font-bold tracking-tight mb-4"
+          style={{ color: 'var(--text-primary)' }}
+        >
+          About ToolGenie {category.name}
+        </h2>
+        <div 
+          class="space-y-4 text-xs sm:text-sm leading-relaxed whitespace-pre-line"
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          {seoData.content}
+        </div>
+      </div>
+    )}
+
+    {/* Explore Other Categories Strip */}
+    <div class="border-t pt-10" style={{ borderColor: 'var(--border-subtle)' }}>
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-heading text-lg font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+          Explore Other Tool Categories
+        </h3>
+        <a href="/#tools-section" class="text-xs font-semibold hover:underline" style={{ color: 'var(--accent)' }}>
+          View All Categories →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {otherCategories.slice(0, 4).map((cat) => (
+          <a
+            href={`/${cat.slug}`}
+            class="p-3.5 rounded-xl border transition-all hover:shadow-xs flex items-center justify-between group"
+            style={{
+              backgroundColor: 'var(--bg-surface)',
+              borderColor: 'var(--border-subtle)'
+            }}
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <span class="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: cat.accentColor }} />
+              <span class="text-xs font-semibold truncate group-hover:underline" style={{ color: 'var(--text-primary)' }}>
+                {cat.name}
+              </span>
+            </div>
+            <span class="text-[10px] font-mono opacity-70 shrink-0" style={{ color: 'var(--text-muted)' }}>
+              {cat.tools.length}
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>

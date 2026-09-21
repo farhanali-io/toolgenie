@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Search, ArrowLeft, LayoutGrid } from 'lucide-react';
+import { categories } from '../data/tools';
+---
+
+<Layout
+  title="404 — Page Not Found | ToolGenie"
+  description="The tool or page you requested could not be found. Explore our 50+ free browser-based tools running 100% client-side."
+  canonicalUrl="https://toolgenie.online/404"
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+    <div 
+      class="w-20 h-20 rounded-3xl mx-auto flex items-center justify-center mb-6 border"
+      style={{
+        backgroundColor: 'var(--bg-surface)',
+        borderColor: 'var(--border-subtle)',
+        color: 'var(--accent)'
+      }}
+    >
+      <span class="font-mono text-3xl font-black">404</span>
+    </div>
+
+    <h1 
+      class="font-heading text-3xl sm:text-4xl font-extrabold tracking-tight mb-3"
+      style={{ color: 'var(--text-primary)' }}
+    >
+      Tool or Page Not Found
+    </h1>
+
+    <p 
+      class="text-sm sm:text-base max-w-md mx-auto mb-8 leading-relaxed"
+      style={{ color: 'var(--text-secondary)' }}
+    >
+      The link you followed may be broken or the tool may have been moved. All of our 50+ tools run directly in your browser.
+    </p>
+
+    <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-opacity hover:opacity-90"
+        style={{
+          backgroundColor: 'var(--accent)',
+          color: 'var(--accent-contrast)'
+        }}
+      >
+        <ArrowLeft size={16} />
+        <span>Return to Home</span>
+      </a>
+
+      <a
+        href="/#tools-section"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm border hover:opacity-80 transition-opacity"
+        style={{
+          backgroundColor: 'var(--bg-surface)',
+          borderColor: 'var(--border-subtle)',
+          color: 'var(--text-primary)'
+        }}
+      >
+        <LayoutGrid size={16} />
+        <span>Browse Categories</span>
+      </a>
+    </div>
+
+    {/* Quick Category List */}
+    <div 
+      class="rounded-2xl border p-6 text-left"
+      style={{
+        backgroundColor: 'var(--bg-surface)',
+        borderColor: 'var(--border-subtle)'
+      }}
+    >
+      <h2 class="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: 'var(--text-muted)' }}>
+        Or jump directly to a tool category:
+      </h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+        {categories.map((cat) => (
+          <a
+            href={`/${cat.slug}`}
+            class="p-2 rounded-lg border hover:opacity-80 transition-colors flex items-center gap-2"
+            style={{
+              backgroundColor: 'var(--bg-input)',
+              borderColor: 'var(--border-subtle)',
+              color: 'var(--text-primary)'
+            }}
+          >
+            <span class="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: cat.accentColor }} />
+            <span class="truncate font-medium">{cat.name}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>

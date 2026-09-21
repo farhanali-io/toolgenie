@@ -1,0 +1,100 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { FileText, ArrowLeft } from 'lucide-react';
+---
+
+<Layout
+  title="Terms of Service — ToolGenie"
+  description="Read the ToolGenie Terms of Service governing the use of our free, client-side browser utilities."
+  canonicalUrl="https://toolgenie.online/terms"
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <div class="mb-8">
+      <a 
+        href="/" 
+        class="inline-flex items-center gap-1.5 text-xs font-semibold hover:underline"
+        style={{ color: 'var(--accent)' }}
+      >
+        <ArrowLeft size={14} />
+        <span>Back to All Tools</span>
+      </a>
+    </div>
+
+    {/* Header */}
+    <div class="border-b pb-8 mb-10" style={{ borderColor: 'var(--border-subtle)' }}>
+      <div 
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-4 border"
+        style={{
+          backgroundColor: 'var(--bg-surface)',
+          borderColor: 'var(--border-subtle)',
+          color: 'var(--accent)'
+        }}
+      >
+        <FileText size={14} />
+        <span>Legal Agreement</span>
+      </div>
+      <h1 
+        class="font-heading text-4xl sm:text-5xl font-extrabold tracking-tight mb-4"
+        style={{ color: 'var(--text-primary)' }}
+      >
+        Terms of Service
+      </h1>
+      <p class="text-sm font-medium" style={{ color: 'var(--text-muted)' }}>
+        Last updated: February 2026
+      </p>
+    </div>
+
+    {/* Content */}
+    <div class="space-y-8 text-sm sm:text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+      <section class="space-y-3">
+        <h2 class="font-heading text-xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+          1. Agreement to Terms
+        </h2>
+        <p>
+          By accessing or using ToolGenie (toolgenie.online), you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not use our utilities.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="font-heading text-xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+          2. Description of Service
+        </h2>
+        <p>
+          ToolGenie provides free, client-side browser utilities for file format conversion, compression, text processing, code formatting, and media manipulation. All processing is carried out entirely within the user&apos;s browser environment.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="font-heading text-xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+          3. User Content &amp; Intellectual Property
+        </h2>
+        <p>
+          You retain 100% of all rights, title, and interest (including copyright) in any files, text, images, or documents you process through ToolGenie. Because files are processed in-memory in your browser, ToolGenie never claims, receives, or holds any license or ownership over your content.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="font-heading text-xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+          4. Disclaimer of Warranties
+        </h2>
+        <p>
+          ToolGenie is provided on an &ldquo;AS IS&rdquo; and &ldquo;AS AVAILABLE&rdquo; basis without warranties of any kind, whether express or implied. While we strive for absolute mathematical precision and high-fidelity output across all tools, you agree that you are solely responsible for verifying critical output files.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="font-heading text-xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+          5. Contact Information
+        </h2>
+        <p>
+          For legal or terms inquiries, please email:
+        </p>
+        <p>
+          <a href="mailto:farhanaly.io3@gmail.com" class="font-bold hover:underline" style={{ color: 'var(--accent)' }}>
+            farhanaly.io3@gmail.com
+          </a>
+        </p>
+      </section>
+    </div>
+  </div>
+</Layout>

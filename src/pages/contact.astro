@@ -1,0 +1,118 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { ContactForm } from '../components/ContactForm';
+import { Mail, MessageSquare, ShieldCheck, ArrowLeft } from 'lucide-react';
+---
+
+<Layout
+  title="Contact Us — ToolGenie"
+  description="Have questions, suggestions, or need support? Reach out to the ToolGenie team. We love hearing from our community."
+  canonicalUrl="https://toolgenie.online/contact"
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <div class="mb-8">
+      <a 
+        href="/" 
+        class="inline-flex items-center gap-1.5 text-xs font-semibold hover:underline"
+        style={{ color: 'var(--accent)' }}
+      >
+        <ArrowLeft size={14} />
+        <span>Back to All Tools</span>
+      </a>
+    </div>
+
+    {/* Header */}
+    <div class="border-b pb-8 mb-10" style={{ borderColor: 'var(--border-subtle)' }}>
+      <div 
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-4 border"
+        style={{
+          backgroundColor: 'var(--bg-surface)',
+          borderColor: 'var(--border-subtle)',
+          color: 'var(--accent)'
+        }}
+      >
+        <MessageSquare size={14} />
+        <span>Get in Touch</span>
+      </div>
+      <h1 
+        class="font-heading text-4xl sm:text-5xl font-extrabold tracking-tight mb-4"
+        style={{ color: 'var(--text-primary)' }}
+      >
+        We&apos;d love to hear from you.
+      </h1>
+      <p 
+        class="text-lg font-medium leading-relaxed max-w-2xl"
+        style={{ color: 'var(--text-secondary)' }}
+      >
+        Whether you have a tool suggestion, spotted a bug, or want to explore partnership opportunities, send us a note below.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      {/* Contact Info Sidebar */}
+      <div class="space-y-6">
+        <div 
+          class="rounded-2xl p-6 border"
+          style={{
+            backgroundColor: 'var(--bg-surface)',
+            borderColor: 'var(--border-subtle)'
+          }}
+        >
+          <div 
+            class="w-10 h-10 rounded-xl flex items-center justify-center mb-4 border"
+            style={{
+              backgroundColor: 'var(--bg-input)',
+              borderColor: 'var(--border-subtle)',
+              color: 'var(--accent)'
+            }}
+          >
+            <Mail size={20} />
+          </div>
+          <h2 class="font-heading text-lg font-bold mb-1" style={{ color: 'var(--text-primary)' }}>
+            Email Us Directly
+          </h2>
+          <p class="text-xs leading-relaxed mb-3" style={{ color: 'var(--text-secondary)' }}>
+            For general inquiries, creator collaborations, or business questions:
+          </p>
+          <a 
+            href="mailto:farhanaly.io3@gmail.com" 
+            class="text-xs font-bold hover:underline break-all"
+            style={{ color: 'var(--accent)' }}
+          >
+            farhanaly.io3@gmail.com
+          </a>
+        </div>
+
+        <div 
+          class="rounded-2xl p-6 border"
+          style={{
+            backgroundColor: 'var(--bg-surface)',
+            borderColor: 'var(--border-subtle)'
+          }}
+        >
+          <div 
+            class="w-10 h-10 rounded-xl flex items-center justify-center mb-4 border"
+            style={{
+              backgroundColor: 'var(--bg-input)',
+              borderColor: 'var(--border-subtle)',
+              color: 'var(--accent)'
+            }}
+          >
+            <ShieldCheck size={20} />
+          </div>
+          <h2 class="font-heading text-lg font-bold mb-1" style={{ color: 'var(--text-primary)' }}>
+            Security & Privacy
+          </h2>
+          <p class="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            Report security vulnerabilities or verify our client-side execution boundaries anytime.
+          </p>
+        </div>
+      </div>
+
+      {/* Form Island */}
+      <div class="lg:col-span-2">
+        <ContactForm client:load />
+      </div>
+    </div>
+  </div>
+</Layout>
