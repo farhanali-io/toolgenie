@@ -44,4 +44,3 @@ User-agent: Bytespider
 Allow: /
 
 Sitemap: https://toolgenie.online/sitemap-index.xml
-Sitemap: https://toolgenie.online/sitemap.xml
