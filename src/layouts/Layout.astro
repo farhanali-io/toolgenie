@@ -97,5 +97,9 @@ const canonical = canonicalUrl || new URL(Astro.url.pathname, 'https://toolgenie
       <slot />
     </main>
     <Footer />
+<script>
+  import { initMotion } from '../scripts/motion-animations.js';
+  initMotion();
+</script>
   </body>
 </html>
