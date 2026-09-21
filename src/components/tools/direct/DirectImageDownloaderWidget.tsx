@@ -11,7 +11,6 @@ import {
   Image as ImageIcon,
   ArrowRight
 } from 'lucide-react';
-import { Link } from '../../../utils/router';
 
 const SAMPLE_IMAGE_URL = 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=1200&q=80';
 
@@ -241,14 +240,14 @@ export const DirectImageDownloaderWidget: React.FC = () => {
             </ol>
 
             <div className="pt-2">
-              <Link
+              <a
                 href="/direct-link-tools/file-hash-checker"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm transition-all"
                 style={{ backgroundColor: 'var(--accent)', color: 'var(--accent-contrast)' }}
               >
                 <span>Go to File Hash Checker</span>
                 <ArrowRight size={13} />
-              </Link>
+              </a>
             </div>
           </div>
         </div>

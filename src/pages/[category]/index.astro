@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { categories } from '../../data/tools';
-import { ToolCard } from '../../components/ToolCard';
+import ToolCard from '../../components/ToolCard.astro';
 import { categorySeoContent } from '../../data/categorySeo';
 import { ArrowLeft, ChevronRight, Sparkles, Layers, ShieldCheck } from 'lucide-react';
 
@@ -81,7 +81,7 @@ const otherCategories = categories.filter((c) => c.slug !== category.slug);
         </div>
 
         <div class="inline-flex items-center gap-1.5 text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>
-          <ShieldCheck size={15} style={{ color: 'var(--accent)' }} />
+          <ShieldCheck size={15} color="var(--accent)" />
           <span>100% Client-Side Execution</span>
         </div>
       </div>
@@ -119,7 +119,6 @@ const otherCategories = categories.filter((c) => c.slug !== category.slug);
             class="block focus:outline-none"
           >
             <ToolCard
-              client:idle
               tool={{
                 ...tool,
                 categoryName: category.name,

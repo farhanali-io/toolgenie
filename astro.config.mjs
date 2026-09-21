@@ -24,6 +24,9 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      forwardConsole: false,
+    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),

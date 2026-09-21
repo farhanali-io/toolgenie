@@ -1,5 +1,5 @@
 ---
-import { Logo } from './Logo';
+import Logo from './Logo.astro';
 import { ThemeSwitcher } from './ThemeSwitcher';
 import { Search } from 'lucide-react';
 ---
@@ -72,7 +72,7 @@ import { Search } from 'lucide-react';
         }}
         aria-label="Search tools"
       >
-        <Search size={16} style={{ color: 'var(--accent)' }} />
+        <Search size={16} color="var(--accent)" />
         <span class="hidden sm:inline-block text-xs font-medium" style={{ color: 'var(--text-muted)' }}>
           Search tools...
         </span>

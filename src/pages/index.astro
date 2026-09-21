@@ -1,10 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Hero } from '../components/Hero';
-import { PopularStrip } from '../components/PopularStrip';
-import { HomeToolExplorer } from '../components/HomeToolExplorer';
-import { HowItWorks } from '../components/HowItWorks';
-import { WhyToolGenie } from '../components/WhyToolGenie';
+import Hero from '../components/Hero.astro';
+import PopularStrip from '../components/PopularStrip.astro';
+import CategoryTabs from '../components/CategoryTabs.astro';
+import ToolGrid from '../components/ToolGrid.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import WhyToolGenie from '../components/WhyToolGenie.astro';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -26,9 +27,12 @@ const jsonLd = {
   canonicalUrl="https://toolgenie.online"
   jsonLd={jsonLd}
 >
-  <Hero client:load />
-  <PopularStrip client:idle />
-  <HomeToolExplorer client:load />
+  <Hero />
+  <PopularStrip />
+  <div id="tools-section-wrapper">
+    <CategoryTabs />
+    <ToolGrid />
+  </div>
   <HowItWorks />
   <WhyToolGenie />
 </Layout>

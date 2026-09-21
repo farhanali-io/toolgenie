@@ -2,8 +2,8 @@
 import Layout from '../../layouts/Layout.astro';
 import { categories } from '../../data/tools';
 import { ToolWidgetDispatcher } from '../../components/tools/ToolWidgetDispatcher';
-import { DynamicIcon } from '../../components/DynamicIcon';
-import { ToolCard } from '../../components/ToolCard';
+import DynamicIcon from '../../components/DynamicIcon.astro';
+import ToolCard from '../../components/ToolCard.astro';
 import { getToolHowToSteps } from '../../utils/toolSteps';
 import { 
   ChevronRight, 
@@ -179,7 +179,7 @@ const combinedJsonLd = [breadcrumbsSchema, appSchema, ...(faqSchema ? [faqSchema
           color: 'var(--text-secondary)'
         }}
       >
-        <ShieldCheck size={15} style={{ color: 'var(--accent)' }} />
+        <ShieldCheck size={15} color="var(--accent)" />
         <span>100% Client-Side Engine</span>
         <span class="w-1 h-1 rounded-full bg-current opacity-40" />
         <span>Your files never leave your browser</span>
@@ -197,7 +197,7 @@ const combinedJsonLd = [breadcrumbsSchema, appSchema, ...(faqSchema ? [faqSchema
           }}
         >
           <ToolWidgetDispatcher 
-            client:load 
+            client:only="react" 
             toolSlug={tool.slug} 
             categorySlug={category.slug} 
           />
@@ -387,7 +387,6 @@ const combinedJsonLd = [breadcrumbsSchema, appSchema, ...(faqSchema ? [faqSchema
               class="block focus:outline-none"
             >
               <ToolCard
-                client:idle
                 tool={{
                   ...relTool,
                   categoryName: category.name,

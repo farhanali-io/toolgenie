@@ -1,5 +1,5 @@
 ---
-import { Logo } from './Logo';
+import Logo from './Logo.astro';
 import { categories } from '../data/tools';
 import { ShieldCheck, Heart } from 'lucide-react';
 
@@ -39,7 +39,7 @@ const popularToolsList = [
             color: 'var(--text-secondary)'
           }}
         >
-          <ShieldCheck size={14} style={{ color: 'var(--accent)' }} />
+          <ShieldCheck size={14} color="var(--accent)" />
           <span>100% Client-Side Processing</span>
         </div>
         <p class="text-xs pt-2" style={{ color: 'var(--text-muted)' }}>

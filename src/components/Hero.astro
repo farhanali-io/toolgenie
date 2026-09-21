@@ -1,306 +1,317 @@
-import React, { useState, useRef, useEffect } from 'react';
+---
 import { Search, X, Sparkles, ArrowRight, Shield } from 'lucide-react';
 import { getAllTools } from '../data/tools';
-import { ToolItem } from '../types';
-import { DynamicIcon } from './DynamicIcon';
+import type { ToolItem } from '../types';
 
-interface HeroProps {
-  onSelectTool?: (tool: ToolItem) => void;
-  searchInputRef?: React.RefObject<HTMLInputElement | null>;
-}
+const allTools: ToolItem[] = getAllTools() as ToolItem[];
 
-export const Hero: React.FC<HeroProps> = ({ onSelectTool, searchInputRef }) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [isFocused, setIsFocused] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const allTools: ToolItem[] = getAllTools() as ToolItem[];
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const internalRef = useRef<HTMLInputElement | null>(null);
-  const activeInputRef = searchInputRef || internalRef;
+const quickSearchItems = ['Merge PDF', 'Compress Image', 'JSON Formatter', 'QR Code', 'Word Counter'];
+---
 
-  const handleSelect = (tool: ToolItem) => {
-    if (onSelectTool) {
-      onSelectTool(tool);
-    } else {
-      window.location.href = `/${tool.categorySlug}/${tool.slug}`;
-    }
-  };
+<section 
+  id="hero-section"
+  class="relative pt-12 pb-16 sm:pt-20 sm:pb-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center"
+>
+  {/* Privacy Guarantee Badge */}
+  <div 
+    class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border mb-6 text-xs font-semibold tracking-wide shadow-xs animate-in fade-in slide-in-from-top-4 duration-300"
+    style="background-color: var(--bg-surface); border-color: var(--border-subtle); color: var(--text-secondary);"
+  >
+    <Shield size={14} color="var(--accent)" />
+    <span>100% Client-Side Engine</span>
+    <span class="w-1 h-1 rounded-full opacity-40 bg-current"></span>
+    <span class="hidden sm:inline">Zero Server Uploads</span>
+    <span class="w-1 h-1 rounded-full opacity-40 bg-current hidden sm:inline"></span>
+    <span class="font-mono text-[11px] font-bold" style="color: var(--accent);">Free Forever</span>
+  </div>
 
-  // Live filter matching tools
-  const filteredTools = searchQuery.trim()
-    ? allTools.filter(tool => {
-        const query = searchQuery.toLowerCase();
-        return (
-          tool.name.toLowerCase().includes(query) ||
-          tool.shortDescription.toLowerCase().includes(query) ||
-          (tool.categoryName && tool.categoryName.toLowerCase().includes(query)) ||
-          tool.slug.toLowerCase().includes(query)
-        );
-      })
-    : [];
-
-  // Reset selected index when query changes
-  useEffect(() => {
-    setSelectedIndex(0);
-  }, [searchQuery]);
-
-  // Keyboard navigation inside search dropdown
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (!filteredTools.length) return;
-
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      setSelectedIndex((prev) => (prev + 1) % filteredTools.length);
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      setSelectedIndex((prev) => (prev - 1 + filteredTools.length) % filteredTools.length);
-    } else if (e.key === 'Enter') {
-      e.preventDefault();
-      if (filteredTools[selectedIndex]) {
-        handleSelect(filteredTools[selectedIndex]);
-        setSearchQuery('');
-        setIsFocused(false);
-      }
-    } else if (e.key === 'Escape') {
-      setIsFocused(false);
-    }
-  };
-
-  const clearSearch = () => {
-    setSearchQuery('');
-    if (activeInputRef.current) {
-      activeInputRef.current.focus();
-    }
-  };
-
-  return (
-    <section 
-      id="hero-section"
-      className="relative pt-12 pb-16 sm:pt-20 sm:pb-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center"
+  {/* Main Headline */}
+  <h1 
+    class="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] mb-5 max-w-4xl mx-auto"
+    style="color: var(--text-primary);"
+  >
+    Free online tools that run{' '}
+    <span 
+      class="relative inline-block"
+      style="color: var(--accent);"
     >
-      {/* Privacy Guarantee Badge */}
-      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border mb-6 text-xs font-semibold tracking-wide shadow-xs animate-in fade-in slide-in-from-top-4 duration-300"
-        style={{
-          backgroundColor: 'var(--bg-surface)',
-          borderColor: 'var(--border-subtle)',
-          color: 'var(--text-secondary)'
-        }}
-      >
-        <Shield size={14} style={{ color: 'var(--accent)' }} />
-        <span>100% Client-Side Engine</span>
-        <span className="w-1 h-1 rounded-full opacity-40 bg-current" />
-        <span className="hidden sm:inline">Zero Server Uploads</span>
-        <span className="w-1 h-1 rounded-full opacity-40 bg-current hidden sm:inline" />
-        <span className="font-mono text-[11px] font-bold" style={{ color: 'var(--accent)' }}>Free Forever</span>
+      100% in your browser.
+    </span>
+  </h1>
+
+  {/* Subtitle */}
+  <p 
+    class="text-lg sm:text-xl font-medium max-w-2xl mx-auto mb-10 leading-relaxed"
+    style="color: var(--text-secondary);"
+  >
+    No uploads. No signup. No limits. Your files never leave your device — ever.
+  </p>
+
+  {/* Search Bar Container */}
+  <div class="relative max-w-2xl mx-auto">
+    <div 
+      id="hero-search-wrapper"
+      class="relative flex items-center rounded-2xl border transition-all duration-200 shadow-lg"
+      style="background-color: var(--bg-surface); border-color: var(--border-strong); box-shadow: 0 4px 20px -2px rgba(0,0,0,0.06);"
+    >
+      <div class="pl-4 sm:pl-5 flex items-center pointer-events-none">
+        <Search 
+          id="search-icon-hero"
+          size={22} 
+          class="transition-colors duration-150"
+          color="var(--text-muted)"
+        />
       </div>
 
-      {/* Main Headline */}
-      <h1 
-        className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] mb-5 max-w-4xl mx-auto"
-        style={{ color: 'var(--text-primary)' }}
+      <input
+        id="hero-search-input"
+        type="text"
+        placeholder="Search 50+ free tools (e.g. merge pdf, compress image, json)..."
+        class="w-full py-4 sm:py-5 pl-3.5 pr-12 rounded-2xl bg-transparent text-sm sm:text-base font-medium focus:outline-none placeholder:font-normal"
+        style="color: var(--text-primary);"
+        autocomplete="off"
+        aria-label="Search tools"
+      />
+
+      <button
+        id="clear-search-button"
+        type="button"
+        class="hidden absolute right-4 p-1.5 rounded-full hover:opacity-80 transition-opacity focus:outline-none"
+        style="background-color: var(--bg-input); color: var(--text-secondary);"
+        aria-label="Clear search query"
       >
-        Free online tools that run{' '}
-        <span 
-          className="relative inline-block"
-          style={{ color: 'var(--accent)' }}
-        >
-          100% in your browser.
+        <X size={15} />
+      </button>
+    </div>
+
+    {/* Live Search Results Dropdown */}
+    <div
+      id="search-live-dropdown"
+      class="hidden absolute left-0 right-0 mt-3 rounded-2xl border shadow-2xl p-2 z-50 max-h-96 overflow-y-auto text-left animate-in fade-in zoom-in-95 duration-150"
+      style="background-color: var(--bg-elevated); border-color: var(--border-strong); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.45);"
+    >
+      <div class="px-3 py-2 border-b flex items-center justify-between text-xs" style="border-color: var(--border-subtle);">
+        <span id="search-dropdown-count" class="font-semibold" style="color: var(--text-secondary);">
+          Tools matching search
         </span>
-      </h1>
+        <span class="text-[11px]" style="color: var(--text-muted);">
+          Use ↑ ↓ to navigate, Enter to view
+        </span>
+      </div>
 
-      {/* Subtitle */}
-      <p 
-        className="text-lg sm:text-xl font-medium max-w-2xl mx-auto mb-10 leading-relaxed"
-        style={{ color: 'var(--text-secondary)' }}
+      <div id="search-results-list" class="space-y-1 mt-1">
+        {/* Populated dynamically via client script */}
+      </div>
+
+      <div id="search-no-results" class="hidden py-8 px-4 text-center">
+        <Sparkles size={24} class="mx-auto mb-2 opacity-50" color="var(--accent)" />
+        <p class="text-sm font-semibold" style="color: var(--text-primary);">
+          No tools found
+        </p>
+        <p class="text-xs mt-1" style="color: var(--text-muted);">
+          Try searching for "PDF", "Image", "Convert", or "Format".
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {/* Quick Search Chips */}
+  <div class="flex flex-wrap items-center justify-center gap-2 mt-4 text-xs font-medium" style="color: var(--text-muted);">
+    <span>Quick search:</span>
+    {quickSearchItems.map((item) => (
+      <button
+        type="button"
+        data-search-chip={item}
+        class="quick-search-chip px-2.5 py-1 rounded-lg border hover:opacity-80 transition-colors cursor-pointer"
+        style="background-color: var(--bg-surface); border-color: var(--border-subtle); color: var(--text-secondary);"
       >
-        No uploads. No signup. No limits. Your files never leave your device — ever.
-      </p>
+        {item}
+      </button>
+    ))}
+  </div>
+</section>
 
-      {/* Search Bar Container */}
-      <div className="relative max-w-2xl mx-auto">
-        <div 
-          className={`relative flex items-center rounded-2xl border transition-all duration-200 shadow-lg ${
-            isFocused ? 'ring-4' : ''
-          }`}
-          style={{
-            backgroundColor: 'var(--bg-surface)',
-            borderColor: isFocused ? 'var(--accent)' : 'var(--border-strong)',
-            boxShadow: isFocused ? '0 10px 25px -5px var(--accent-glow)' : '0 4px 20px -2px rgba(0,0,0,0.06)'
-          }}
-        >
-          <div className="pl-4 sm:pl-5 flex items-center pointer-events-none">
-            <Search 
-              size={22} 
-              style={{ color: isFocused ? 'var(--accent)' : 'var(--text-muted)' }} 
-              className="transition-colors duration-150"
-            />
-          </div>
+{/* Embed tools catalog for instantaneous client-side search */}
+<script id="hero-all-tools-json" type="application/json" set:html={JSON.stringify(allTools)} />
 
-          <input
-            id="hero-search-input"
-            ref={activeInputRef}
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => {
-              // Delay hiding to allow item click
-              setTimeout(() => setIsFocused(false), 220);
-            }}
-            onKeyDown={handleKeyDown}
-            placeholder="Search 50+ free tools (e.g. merge pdf, compress image, json)..."
-            className="w-full py-4 sm:py-5 pl-3.5 pr-12 rounded-2xl bg-transparent text-sm sm:text-base font-medium focus:outline-none placeholder:font-normal"
-            style={{
-              color: 'var(--text-primary)'
-            }}
-            autoComplete="off"
-            aria-label="Search tools"
-          />
+<script>
+  function initHeroSearch() {
+    const dataEl = document.getElementById('hero-all-tools-json');
+    if (!dataEl) return;
 
-          {searchQuery && (
-            <button
-              id="clear-search-button"
-              type="button"
-              onClick={clearSearch}
-              className="absolute right-4 p-1.5 rounded-full hover:opacity-80 transition-opacity focus:outline-none"
-              style={{
-                backgroundColor: 'var(--bg-input)',
-                color: 'var(--text-secondary)'
-              }}
-              aria-label="Clear search query"
+    let tools: any[] = [];
+    try {
+      tools = JSON.parse(dataEl.textContent || '[]');
+    } catch {
+      return;
+    }
+
+    const input = document.getElementById('hero-search-input') as HTMLInputElement | null;
+    const wrapper = document.getElementById('hero-search-wrapper');
+    const clearBtn = document.getElementById('clear-search-button');
+    const dropdown = document.getElementById('search-live-dropdown');
+    const countEl = document.getElementById('search-dropdown-count');
+    const resultsList = document.getElementById('search-results-list');
+    const noResults = document.getElementById('search-no-results');
+    const searchIcon = document.getElementById('search-icon-hero');
+    const chips = document.querySelectorAll<HTMLButtonElement>('.quick-search-chip');
+
+    if (!input || !dropdown || !resultsList || !noResults || !clearBtn) return;
+
+    let selectedIndex = 0;
+    let currentResults: any[] = [];
+
+    function renderResults(filtered: any[], query: string) {
+      currentResults = filtered;
+      selectedIndex = 0;
+
+      if (query.trim().length === 0) {
+        dropdown?.classList.add('hidden');
+        clearBtn?.classList.add('hidden');
+        return;
+      }
+
+      clearBtn?.classList.remove('hidden');
+      dropdown?.classList.remove('hidden');
+
+      if (countEl) {
+        countEl.textContent = `${filtered.length} ${filtered.length === 1 ? 'tool' : 'tools'} matching "${query}"`;
+      }
+
+      if (filtered.length === 0) {
+        resultsList!.innerHTML = '';
+        noResults?.classList.remove('hidden');
+      } else {
+        noResults?.classList.add('hidden');
+        resultsList!.innerHTML = filtered.map((tool, idx) => {
+          const isLive = tool.status === 'live';
+          return `
+            <a
+              href="/${tool.categorySlug}/${tool.slug}"
+              data-index="${idx}"
+              class="search-item flex items-center justify-between p-3 rounded-xl text-left transition-all duration-150 hover:bg-[var(--bg-input)] ${idx === 0 ? 'bg-[var(--bg-input)]' : ''}"
+              style="color: var(--text-primary);"
             >
-              <X size={15} />
-            </button>
-          )}
-        </div>
-
-        {/* Live Search Results Dropdown */}
-        {isFocused && searchQuery.trim().length > 0 && (
-          <div
-            id="search-live-dropdown"
-            ref={dropdownRef}
-            className="absolute left-0 right-0 mt-3 rounded-2xl border shadow-2xl p-2 z-50 max-h-96 overflow-y-auto text-left animate-in fade-in zoom-in-95 duration-150"
-            style={{
-              backgroundColor: 'var(--bg-elevated)',
-              borderColor: 'var(--border-strong)',
-              boxShadow: '0 25px 50px -12px rgba(0,0,0,0.45)'
-            }}
-          >
-            <div className="px-3 py-2 border-b flex items-center justify-between text-xs" style={{ borderColor: 'var(--border-subtle)' }}>
-              <span className="font-semibold" style={{ color: 'var(--text-secondary)' }}>
-                {filteredTools.length} {filteredTools.length === 1 ? 'tool' : 'tools'} matching &ldquo;{searchQuery}&rdquo;
-              </span>
-              <span className="text-[11px]" style={{ color: 'var(--text-muted)' }}>
-                Use ↑ ↓ to navigate, Enter to view
-              </span>
-            </div>
-
-            {filteredTools.length === 0 ? (
-              <div className="py-8 px-4 text-center">
-                <Sparkles size={24} className="mx-auto mb-2 opacity-50" style={{ color: 'var(--accent)' }} />
-                <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
-                  No tools found
-                </p>
-                <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>
-                  Try searching for &quot;PDF&quot;, &quot;Image&quot;, &quot;Convert&quot;, or &quot;Format&quot;.
-                </p>
-              </div>
-            ) : (
-              <div className="space-y-1 mt-1">
-                {filteredTools.map((tool, index) => {
-                  const isSelected = index === selectedIndex;
-                  const isLive = tool.status === 'live';
-                  return (
-                    <button
-                      key={tool.slug}
-                      id={`search-result-${tool.slug}`}
-                      type="button"
-                      onMouseDown={(e) => {
-                        e.preventDefault();
-                        handleSelect(tool);
-                        setSearchQuery('');
-                        setIsFocused(false);
-                      }}
-                      onMouseEnter={() => setSelectedIndex(index)}
-                      className={`w-full flex items-center justify-between p-3 rounded-xl text-left transition-all duration-150 ${
-                        isSelected ? 'ring-1' : ''
-                      }`}
-                      style={{
-                        backgroundColor: isSelected ? 'var(--bg-input)' : 'transparent',
-                        borderColor: isSelected ? 'var(--accent)' : 'transparent',
-                        color: 'var(--text-primary)'
-                      }}
+              <div class="flex items-center gap-3 min-w-0 pr-3">
+                <div 
+                  class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border"
+                  style="background-color: var(--bg-surface); border-color: var(--border-subtle); color: ${tool.categoryAccentColor || 'var(--accent)'};"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-0">
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm font-bold truncate">${tool.name}</span>
+                    <span 
+                      class="text-[10px] px-1.5 py-0.5 rounded font-mono font-medium shrink-0"
+                      style="background-color: ${isLive ? 'var(--badge-live-bg)' : 'var(--badge-soon-bg)'}; color: ${isLive ? 'var(--badge-live-text)' : 'var(--badge-soon-text)'};"
                     >
-                      <div className="flex items-center gap-3 min-w-0 pr-3">
-                        <div 
-                          className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border"
-                          style={{
-                            backgroundColor: 'var(--bg-surface)',
-                            borderColor: 'var(--border-subtle)',
-                            color: tool.categoryAccentColor || 'var(--accent)'
-                          }}
-                        >
-                          <DynamicIcon name={tool.icon} size={20} />
-                        </div>
-                        <div className="min-w-0">
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm font-bold truncate">
-                              {tool.name}
-                            </span>
-                            <span 
-                              className="text-[10px] px-1.5 py-0.5 rounded font-mono font-medium shrink-0"
-                              style={{
-                                backgroundColor: isLive ? 'var(--badge-live-bg)' : 'var(--badge-soon-bg)',
-                                color: isLive ? 'var(--badge-live-text)' : 'var(--badge-soon-text)'
-                              }}
-                            >
-                              {isLive ? 'LIVE' : 'COMING SOON'}
-                            </span>
-                          </div>
-                          <p className="text-xs truncate mt-0.5" style={{ color: 'var(--text-secondary)' }}>
-                            {tool.shortDescription}
-                          </p>
-                        </div>
-                      </div>
-
-                      <ArrowRight 
-                        size={16} 
-                        className={`shrink-0 transition-transform ${isSelected ? 'translate-x-1' : ''}`}
-                        style={{ color: isSelected ? 'var(--accent)' : 'var(--text-muted)' }}
-                      />
-                    </button>
-                  );
-                })}
+                      ${isLive ? 'LIVE' : 'COMING SOON'}
+                    </span>
+                  </div>
+                  <p class="text-xs truncate mt-0.5" style="color: var(--text-secondary);">${tool.shortDescription}</p>
+                </div>
               </div>
-            )}
-          </div>
-        )}
-      </div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent);">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </a>
+          `;
+        }).join('');
+      }
+    }
 
-      {/* Quick Search Chips */}
-      <div className="flex flex-wrap items-center justify-center gap-2 mt-4 text-xs font-medium" style={{ color: 'var(--text-muted)' }}>
-        <span>Quick search:</span>
-        {['Merge PDF', 'Compress Image', 'JSON Formatter', 'QR Code', 'Word Counter'].map((item) => (
-          <button
-            key={item}
-            type="button"
-            onClick={() => {
-              setSearchQuery(item);
-              if (activeInputRef.current) {
-                activeInputRef.current.focus();
-              }
-            }}
-            className="px-2.5 py-1 rounded-lg border hover:opacity-80 transition-colors"
-            style={{
-              backgroundColor: 'var(--bg-surface)',
-              borderColor: 'var(--border-subtle)',
-              color: 'var(--text-secondary)'
-            }}
-          >
-            {item}
-          </button>
-        ))}
-      </div>
-    </section>
-  );
-};
+    function doSearch(val: string) {
+      const query = val.toLowerCase().trim();
+      if (!query) {
+        renderResults([], '');
+        return;
+      }
+      const matches = tools.filter(tool => 
+        tool.name.toLowerCase().includes(query) ||
+        tool.shortDescription.toLowerCase().includes(query) ||
+        (tool.categoryName && tool.categoryName.toLowerCase().includes(query)) ||
+        tool.slug.toLowerCase().includes(query)
+      );
+      renderResults(matches, val);
+    }
+
+    input.oninput = (e: any) => {
+      doSearch(e.target.value);
+    };
+
+    input.onfocus = () => {
+      if (wrapper) {
+        wrapper.style.borderColor = 'var(--accent)';
+        wrapper.style.boxShadow = '0 10px 25px -5px var(--accent-glow)';
+      }
+      if (searchIcon) {
+        searchIcon.style.color = 'var(--accent)';
+      }
+      if (input.value.trim().length > 0) {
+        doSearch(input.value);
+      }
+    };
+
+    input.onblur = () => {
+      if (wrapper) {
+        wrapper.style.borderColor = 'var(--border-strong)';
+        wrapper.style.boxShadow = '0 4px 20px -2px rgba(0,0,0,0.06)';
+      }
+      if (searchIcon) {
+        searchIcon.style.color = 'var(--text-muted)';
+      }
+      setTimeout(() => {
+        dropdown?.classList.add('hidden');
+      }, 250);
+    };
+
+    input.onkeydown = (e) => {
+      if (!currentResults.length) return;
+      const items = resultsList?.querySelectorAll<HTMLElement>('.search-item') || [];
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        selectedIndex = (selectedIndex + 1) % currentResults.length;
+        items.forEach((item, idx) => {
+          item.classList.toggle('bg-[var(--bg-input)]', idx === selectedIndex);
+        });
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        selectedIndex = (selectedIndex - 1 + currentResults.length) % currentResults.length;
+        items.forEach((item, idx) => {
+          item.classList.toggle('bg-[var(--bg-input)]', idx === selectedIndex);
+        });
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (currentResults[selectedIndex]) {
+          const tool = currentResults[selectedIndex];
+          window.location.href = `/${tool.categorySlug}/${tool.slug}`;
+        }
+      } else if (e.key === 'Escape') {
+        dropdown?.classList.add('hidden');
+      }
+    };
+
+    clearBtn.onclick = () => {
+      input.value = '';
+      renderResults([], '');
+      input.focus();
+    };
+
+    chips.forEach(chip => {
+      chip.onclick = () => {
+        const val = chip.getAttribute('data-search-chip') || '';
+        input.value = val;
+        input.focus();
+        doSearch(val);
+      };
+    });
+  }
+
+  initHeroSearch();
+  document.addEventListener('astro:page-load', initHeroSearch);
+</script>
