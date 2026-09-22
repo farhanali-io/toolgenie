@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev --port 3000 --host 0.0.0.0",
-    "build": "astro build",
+    "build": "astro build && node scripts/postbuild.js",
     "preview": "astro preview --port 3000 --host 0.0.0.0",
     "clean": "rm -rf dist",
     "postinstall": "node scripts/patch-vite.js",

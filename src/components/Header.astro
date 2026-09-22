@@ -1,12 +1,13 @@
 ---
 import Logo from './Logo.astro';
 import { ThemeSwitcher } from './ThemeSwitcher';
-import { Search } from 'lucide-react';
+import { Search, ChevronDown, Menu, X, ChevronRight } from 'lucide-react';
+import { categories } from '../data/tools.js';
 ---
 
 <header 
   id="main-header"
-  class="sticky top-0 z-40 w-full transition-all duration-200 border-b backdrop-blur-md"
+  class="relative sticky top-0 z-40 w-full transition-all duration-200 border-b backdrop-blur-md"
   style={{
     backgroundColor: 'var(--header-bg)',
     borderColor: 'var(--border-subtle)'
@@ -22,16 +23,28 @@ import { Search } from 'lucide-react';
       <Logo size="md" />
     </a>
 
-    {/* Center / Nav Items */}
+    {/* Center / Nav Items (Desktop md+) */}
     <nav class="hidden md:flex items-center gap-1.5 lg:gap-3" aria-label="Main Navigation">
-      <a
-        id="nav-link-tools"
-        href="/#tools-section"
-        class="px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors duration-150 hover:opacity-80 focus:outline-none focus:ring-2"
+      {/* Tools Mega-Menu Trigger Button */}
+      <button
+        type="button"
+        id="desktop-tools-btn"
+        class="px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors duration-150 flex items-center gap-1.5 hover:opacity-85 focus:outline-none focus:ring-2 cursor-pointer"
         style={{ color: 'var(--text-primary)' }}
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-controls="desktop-mega-menu"
+        aria-label="Browse all tools"
       >
-        Tools
-      </a>
+        <span>Tools</span>
+        <ChevronDown 
+          id="desktop-tools-chevron" 
+          size={14} 
+          class="transition-transform duration-200" 
+          color="currentColor" 
+        />
+      </button>
+
       <a
         id="nav-link-blog"
         href="/blog"
@@ -58,7 +71,7 @@ import { Search } from 'lucide-react';
       </a>
     </nav>
 
-    {/* Right Actions: Theme Switcher & Search Button */}
+    {/* Right Actions: Search, Theme Switcher & Mobile Hamburger */}
     <div class="flex items-center gap-2 sm:gap-3">
       {/* Search Trigger Button */}
       <a
@@ -90,11 +103,590 @@ import { Search } from 'lucide-react';
 
       {/* Theme Switcher Island */}
       <ThemeSwitcher client:load />
+
+      {/* Mobile Hamburger Trigger (Visible on < md) */}
+      <button
+        type="button"
+        id="mobile-menu-btn"
+        class="flex md:hidden p-2 rounded-lg border items-center justify-center transition-colors focus:outline-none focus:ring-2 cursor-pointer"
+        style={{
+          backgroundColor: 'var(--bg-surface)',
+          borderColor: 'var(--border-subtle)',
+          color: 'var(--text-primary)'
+        }}
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-drawer"
+      >
+        <Menu size={20} />
+      </button>
+    </div>
+  </div>
+
+  {/* Desktop Tools Mega-Menu Panel */}
+  <div
+    id="desktop-mega-menu"
+    class="hidden md:block absolute left-0 right-0 top-full w-full pt-1.5 px-4 sm:px-6 lg:px-8 z-50 pointer-events-none"
+    role="region"
+    aria-label="All Tools Mega Menu"
+  >
+    <div
+      id="desktop-mega-panel"
+      class="max-w-7xl mx-auto rounded-2xl border shadow-2xl p-6 lg:p-8 backdrop-blur-md overflow-hidden pointer-events-auto"
+      style={{
+        backgroundColor: 'var(--bg-surface)',
+        borderColor: 'var(--border-subtle)'
+      }}
+    >
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-h-[75vh] overflow-y-auto pr-1">
+        {categories.map((category) => (
+          <div class="flex flex-col space-y-2.5">
+            <div class="flex items-center gap-2 pb-2 border-b" style={{ borderColor: 'var(--border-subtle)' }}>
+              <span class="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: category.accentColor }}></span>
+              <h3 class="text-sm font-bold tracking-tight" style={{ color: category.accentColor }}>
+                {category.name}
+              </h3>
+            </div>
+            
+            <ul class="space-y-0.5 flex-1">
+              {category.tools.map((tool) => (
+                <li>
+                  {tool.status === 'live' ? (
+                    <a
+                      href={`/${category.slug}/${tool.slug}`}
+                      class="mega-tool-link group flex items-center justify-between px-2.5 py-1.5 rounded-r-md text-xs font-medium"
+                      style={{
+                        color: 'var(--text-secondary)',
+                        '--cat-accent': category.accentColor,
+                        '--cat-glow': `${category.accentColor}55`
+                      }}
+                    >
+                      <span class="truncate group-hover:translate-x-0.5 transition-transform duration-150">
+                        {tool.name}
+                      </span>
+                    </a>
+                  ) : (
+                    <div 
+                      class="flex items-center justify-between px-2.5 py-1.5 text-xs font-medium rounded-r-md opacity-45 cursor-not-allowed select-none"
+                      style={{ color: 'var(--text-muted)' }}
+                      title="Coming Soon"
+                    >
+                      <span class="truncate">{tool.name}</span>
+                      <span 
+                        class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded border"
+                        style={{
+                          backgroundColor: 'var(--bg-input)',
+                          borderColor: 'var(--border-subtle)',
+                          color: 'var(--text-muted)'
+                        }}
+                      >
+                        Soon
+                      </span>
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href={`/${category.slug}`}
+              class="mega-view-all inline-flex items-center gap-1.5 text-xs font-semibold pt-1.5 border-t transition-opacity hover:opacity-80"
+              style={{
+                color: category.accentColor,
+                borderColor: 'var(--border-subtle)'
+              }}
+            >
+              <span>View all {category.name}</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 </header>
 
+{/* Mobile Drawer Overlay Backdrop */}
+<div
+  id="mobile-drawer-overlay"
+  class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs"
+  aria-hidden="true"
+></div>
+
+{/* Mobile Slide-In Navigation Drawer */}
+<div
+  id="mobile-drawer"
+  class="fixed inset-y-0 right-0 z-50 w-full sm:max-w-md flex flex-col shadow-2xl"
+  style={{
+    backgroundColor: 'var(--bg-surface)',
+    borderLeft: '1px solid var(--border-subtle)'
+  }}
+  role="dialog"
+  aria-modal="true"
+  aria-label="Navigation Menu"
+>
+  {/* Drawer Header */}
+  <div 
+    class="h-16 px-5 border-b flex items-center justify-between shrink-0"
+    style={{ borderColor: 'var(--border-subtle)' }}
+  >
+    <a href="/" class="mobile-drawer-link focus:outline-none focus:ring-2 rounded-lg" aria-label="ToolGenie Home">
+      <Logo size="sm" />
+    </a>
+    <button
+      type="button"
+      id="mobile-drawer-close"
+      class="p-2 rounded-lg border flex items-center justify-center transition-colors focus:outline-none focus:ring-2 cursor-pointer"
+      style={{
+        backgroundColor: 'var(--bg-input)',
+        borderColor: 'var(--border-subtle)',
+        color: 'var(--text-primary)'
+      }}
+      aria-label="Close navigation menu"
+    >
+      <X size={20} />
+    </button>
+  </div>
+
+  {/* Drawer Scrollable Content */}
+  <div class="flex-1 overflow-y-auto px-5 py-5 space-y-6">
+    {/* All 9 Categories as Accordions */}
+    <div class="space-y-1.5">
+      <p class="text-[11px] font-bold uppercase tracking-wider px-1 mb-2" style={{ color: 'var(--text-muted)' }}>
+        Categories & Tools
+      </p>
+      {categories.map((category) => (
+        <div class="mobile-accordion-item rounded-xl border overflow-hidden" style={{ borderColor: 'var(--border-subtle)' }}>
+          <button
+            type="button"
+            class="mobile-accordion-trigger w-full px-3.5 py-3 flex items-center justify-between text-left transition-colors font-semibold text-sm focus:outline-none focus:ring-1 cursor-pointer"
+            style={{
+              backgroundColor: 'var(--bg-surface)',
+              color: 'var(--text-primary)'
+            }}
+            aria-expanded="false"
+            aria-controls={`mobile-cat-panel-${category.slug}`}
+          >
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: category.accentColor }}></span>
+              <span class="font-bold">{category.name}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span 
+                class="text-[11px] px-2 py-0.5 rounded-full font-medium"
+                style={{ backgroundColor: 'var(--bg-input)', color: 'var(--text-muted)' }}
+              >
+                {category.tools.length}
+              </span>
+              <ChevronRight size={16} class="mobile-accordion-icon transition-transform duration-200" style={{ color: 'var(--text-muted)' }} />
+            </div>
+          </button>
+          
+          <div
+            id={`mobile-cat-panel-${category.slug}`}
+            class="mobile-accordion-panel hidden px-3.5 pb-3.5 pt-1 space-y-1 border-t"
+            style={{
+              backgroundColor: 'var(--bg-input)',
+              borderColor: 'var(--border-subtle)'
+            }}
+          >
+            {category.tools.map((tool) => (
+              tool.status === 'live' ? (
+                <a
+                  href={`/${category.slug}/${tool.slug}`}
+                  class="mobile-drawer-link flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors hover:opacity-100"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  <span>{tool.name}</span>
+                  <span class="text-[11px] font-semibold opacity-70" style={{ color: category.accentColor }}>Open &rarr;</span>
+                </a>
+              ) : (
+                <div
+                  class="flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg opacity-45 cursor-not-allowed select-none"
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  <span>{tool.name}</span>
+                  <span 
+                    class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded border"
+                    style={{
+                      backgroundColor: 'var(--bg-surface)',
+                      borderColor: 'var(--border-subtle)',
+                      color: 'var(--text-muted)'
+                    }}
+                  >
+                    Soon
+                  </span>
+                </div>
+              )
+            ))}
+            <div class="pt-2 border-t mt-2" style={{ borderColor: 'var(--border-subtle)' }}>
+              <a
+                href={`/${category.slug}`}
+                class="mobile-drawer-link flex items-center justify-between px-3 py-1.5 text-xs font-bold transition-opacity hover:opacity-80"
+                style={{ color: category.accentColor }}
+              >
+                <span>View all {category.name}</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Static Navigation Links */}
+    <div class="pt-4 border-t space-y-1.5" style={{ borderColor: 'var(--border-subtle)' }}>
+      <p class="text-[11px] font-bold uppercase tracking-wider px-1 mb-2" style={{ color: 'var(--text-muted)' }}>
+        Site Pages
+      </p>
+      <a
+        href="/blog"
+        class="mobile-drawer-link flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-colors"
+        style={{ color: 'var(--text-primary)', backgroundColor: 'var(--bg-surface)', border: '1px solid var(--border-subtle)' }}
+      >
+        <span>Blog</span>
+        <span class="text-xs" style={{ color: 'var(--text-muted)' }}>&rarr;</span>
+      </a>
+      <a
+        href="/about"
+        class="mobile-drawer-link flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-colors"
+        style={{ color: 'var(--text-primary)', backgroundColor: 'var(--bg-surface)', border: '1px solid var(--border-subtle)' }}
+      >
+        <span>About</span>
+        <span class="text-xs" style={{ color: 'var(--text-muted)' }}>&rarr;</span>
+      </a>
+      <a
+        href="/contact"
+        class="mobile-drawer-link flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-colors"
+        style={{ color: 'var(--text-primary)', backgroundColor: 'var(--bg-surface)', border: '1px solid var(--border-subtle)' }}
+      >
+        <span>Contact</span>
+        <span class="text-xs" style={{ color: 'var(--text-muted)' }}>&rarr;</span>
+      </a>
+    </div>
+
+    {/* Theme Switcher at bottom of mobile drawer */}
+    <div class="pt-4 pb-8 border-t" style={{ borderColor: 'var(--border-subtle)' }}>
+      <p class="text-[11px] font-bold uppercase tracking-wider px-1 mb-2.5" style={{ color: 'var(--text-muted)' }}>
+        Appearance & Theme
+      </p>
+      <div class="px-1">
+        <ThemeSwitcher client:load />
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Desktop Mega Menu Transitions */
+  #desktop-mega-menu {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    #desktop-mega-menu {
+      transition: opacity 150ms ease-in, transform 150ms ease-in, visibility 150ms ease-in;
+    }
+  }
+
+  #desktop-mega-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    #desktop-mega-menu.is-open {
+      transition: opacity 200ms ease-out, transform 200ms ease-out, visibility 200ms ease-out;
+    }
+  }
+
+  /* Tool Link Hover State */
+  .mega-tool-link {
+    border-left: 2px solid transparent;
+    transition: all 150ms ease;
+  }
+
+  .mega-tool-link:hover,
+  .mega-tool-link:focus-visible {
+    background-color: var(--bg-input);
+    color: var(--accent) !important;
+    border-left-color: var(--cat-accent, var(--accent)) !important;
+    box-shadow: -4px 0 10px -2px var(--cat-glow, rgba(99, 102, 241, 0.3));
+  }
+
+  /* Mobile Drawer Overlay */
+  #mobile-drawer-overlay {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    #mobile-drawer-overlay {
+      transition: opacity 300ms cubic-bezier(0.32, 0.72, 0, 1), visibility 300ms;
+    }
+  }
+
+  #mobile-drawer-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* Mobile Drawer Panel */
+  #mobile-drawer {
+    transform: translateX(100%);
+    visibility: hidden;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    #mobile-drawer {
+      transition: transform 300ms cubic-bezier(0.32, 0.72, 0, 1), visibility 300ms;
+    }
+  }
+
+  #mobile-drawer.is-open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  /* Reduced Motion Override */
+  @media (prefers-reduced-motion: reduce) {
+    #desktop-mega-menu,
+    #desktop-mega-menu.is-open,
+    #mobile-drawer-overlay,
+    #mobile-drawer-overlay.is-open,
+    #mobile-drawer,
+    #mobile-drawer.is-open,
+    .mobile-accordion-icon,
+    #desktop-tools-chevron {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+</style>
+
 <script is:inline>
+  // Desktop Mega Menu Logic
+  const toolsBtn = document.getElementById('desktop-tools-btn');
+  const toolsChevron = document.getElementById('desktop-tools-chevron');
+  const megaMenu = document.getElementById('desktop-mega-menu');
+  const megaPanel = document.getElementById('desktop-mega-panel');
+
+  let openTimer = null;
+  let closeTimer = null;
+
+  function isMegaMenuOpen() {
+    return megaMenu?.classList.contains('is-open');
+  }
+
+  function openMegaMenu() {
+    clearTimeout(closeTimer);
+    clearTimeout(openTimer);
+    if (!megaMenu) return;
+    megaMenu.classList.add('is-open');
+    toolsBtn?.setAttribute('aria-expanded', 'true');
+    if (toolsChevron) {
+      toolsChevron.style.transform = 'rotate(180deg)';
+    }
+  }
+
+  function closeMegaMenu() {
+    clearTimeout(closeTimer);
+    clearTimeout(openTimer);
+    if (!megaMenu) return;
+    megaMenu.classList.remove('is-open');
+    toolsBtn?.setAttribute('aria-expanded', 'false');
+    if (toolsChevron) {
+      toolsChevron.style.transform = 'rotate(0deg)';
+    }
+  }
+
+  function toggleMegaMenu() {
+    if (isMegaMenuOpen()) {
+      closeMegaMenu();
+    } else {
+      openMegaMenu();
+    }
+  }
+
+  // Hover with 100ms open delay & 180ms leave buffer
+  toolsBtn?.addEventListener('mouseenter', () => {
+    clearTimeout(closeTimer);
+    if (!isMegaMenuOpen()) {
+      openTimer = setTimeout(openMegaMenu, 100);
+    }
+  });
+
+  toolsBtn?.addEventListener('mouseleave', () => {
+    clearTimeout(openTimer);
+    closeTimer = setTimeout(closeMegaMenu, 180);
+  });
+
+  megaMenu?.addEventListener('mouseenter', () => {
+    clearTimeout(closeTimer);
+  });
+
+  megaMenu?.addEventListener('mouseleave', () => {
+    closeTimer = setTimeout(closeMegaMenu, 180);
+  });
+
+  // Click toggle on desktop
+  toolsBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    toggleMegaMenu();
+  });
+
+  // Keyboard navigation on tools button
+  toolsBtn?.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openMegaMenu();
+      const firstLink = megaPanel?.querySelector('a');
+      firstLink?.focus();
+    }
+  });
+
+  // Close when link inside mega menu is clicked
+  megaMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      closeMegaMenu();
+    });
+  });
+
+  // Close mega menu if focus moves out of both panel and button
+  megaMenu?.addEventListener('focusout', () => {
+    requestAnimationFrame(() => {
+      if (isMegaMenuOpen()) {
+        if (!megaMenu.contains(document.activeElement) && document.activeElement !== toolsBtn) {
+          closeMegaMenu();
+        }
+      }
+    });
+  });
+
+  // Mobile Drawer Logic
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileDrawerOverlay = document.getElementById('mobile-drawer-overlay');
+  const mobileDrawer = document.getElementById('mobile-drawer');
+  const mobileDrawerClose = document.getElementById('mobile-drawer-close');
+
+  function isDrawerOpen() {
+    return mobileDrawer?.classList.contains('is-open');
+  }
+
+  function openDrawer() {
+    if (!mobileDrawer || !mobileDrawerOverlay) return;
+    mobileDrawerOverlay.classList.add('is-open');
+    mobileDrawer.classList.add('is-open');
+    mobileMenuBtn?.setAttribute('aria-expanded', 'true');
+    mobileMenuBtn?.setAttribute('aria-label', 'Close navigation menu');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      mobileDrawerClose?.focus();
+    }, 50);
+  }
+
+  function closeDrawer() {
+    if (!mobileDrawer || !mobileDrawerOverlay) return;
+    mobileDrawerOverlay.classList.remove('is-open');
+    mobileDrawer.classList.remove('is-open');
+    mobileMenuBtn?.setAttribute('aria-expanded', 'false');
+    mobileMenuBtn?.setAttribute('aria-label', 'Open navigation menu');
+    document.body.style.overflow = '';
+    mobileMenuBtn?.focus();
+  }
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    if (isDrawerOpen()) {
+      closeDrawer();
+    } else {
+      openDrawer();
+    }
+  });
+
+  mobileDrawerClose?.addEventListener('click', closeDrawer);
+  mobileDrawerOverlay?.addEventListener('click', closeDrawer);
+
+  // Close drawer when any navigation link inside is clicked
+  const mobileNavLinks = mobileDrawer?.querySelectorAll('.mobile-drawer-link');
+  mobileNavLinks?.forEach((link) => {
+    link.addEventListener('click', () => {
+      closeDrawer();
+    });
+  });
+
+  // Mobile Accordion Items
+  const accordionTriggers = document.querySelectorAll('.mobile-accordion-trigger');
+  accordionTriggers.forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+      const panel = trigger.parentElement?.querySelector('.mobile-accordion-panel');
+      const icon = trigger.querySelector('.mobile-accordion-icon');
+
+      if (isExpanded) {
+        trigger.setAttribute('aria-expanded', 'false');
+        panel?.classList.add('hidden');
+        if (icon) icon.style.transform = 'rotate(0deg)';
+      } else {
+        trigger.setAttribute('aria-expanded', 'true');
+        panel?.classList.remove('hidden');
+        if (icon) icon.style.transform = 'rotate(90deg)';
+      }
+    });
+  });
+
+  // Focus trap inside mobile drawer
+  mobileDrawer?.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab') {
+      const focusable = mobileDrawer.querySelectorAll(
+        'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }
+  });
+
+  // Global Keydown (Escape)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (isDrawerOpen()) {
+        closeDrawer();
+      } else if (isMegaMenuOpen()) {
+        closeMegaMenu();
+        toolsBtn?.focus();
+      }
+    }
+  });
+
+  // Click Outside to Close Mega Menu
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (isMegaMenuOpen()) {
+      if (!toolsBtn?.contains(target) && !megaMenu?.contains(target)) {
+        closeMegaMenu();
+      }
+    }
+  });
+
   // Quick keyboard shortcut '/'
   window.addEventListener('keydown', (e) => {
     if (
@@ -125,3 +717,4 @@ import { Search } from 'lucide-react';
     }
   }, { passive: true });
 </script>
+
