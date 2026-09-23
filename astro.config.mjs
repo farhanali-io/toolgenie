@@ -20,7 +20,22 @@ export default defineConfig({
     sitemap(),
   ],
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      {
+        name: 'vite-client-send-guard',
+        apply: 'serve',
+        transform(code, id) {
+          if (id.includes('/@vite/client') || id.includes('vite/dist/client/client.mjs') || id.includes('vite/dist/client/bundledDevClient.mjs')) {
+            return code.replaceAll(
+              'wsTransport.send(data);',
+              'wsTransport?.send?.(data);'
+            );
+          }
+          return null;
+        }
+      }
+    ],
     server: {
       forwardConsole: false,
     },

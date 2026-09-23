@@ -79,6 +79,23 @@ const canonical = canonicalUrl || new URL(Astro.url.pathname, 'https://toolgenie
             enumerable: true
           });
         } catch (e) {}
+
+        // Defensive patch for WebSocket/HMR environments where ws transport or send may be uninitialized
+        try {
+          if (typeof window !== 'undefined') {
+            window.addEventListener('error', function(event) {
+              if (event && event.message && event.message.indexOf("reading 'send'") !== -1) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+            }, true);
+            window.addEventListener('unhandledrejection', function(event) {
+              if (event && event.reason && event.reason.message && event.reason.message.indexOf("reading 'send'") !== -1) {
+                event.preventDefault();
+              }
+            });
+          }
+        } catch (e) {}
       })();
     </script>
 
