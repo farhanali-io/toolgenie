@@ -1,0 +1,487 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { 
+  ArrowLeft, 
+  Calendar, 
+  Clock, 
+  ShieldCheck, 
+  CheckCircle2, 
+  FileText, 
+  ArrowRight, 
+  ChevronRight, 
+  Cpu, 
+  Lock, 
+  Sparkles, 
+  HelpCircle, 
+  Layers, 
+  Minimize2, 
+  Scissors,
+  FileImage,
+  BookOpen
+} from 'lucide-react';
+
+const title = "How to Compress a PDF Without Uploading It — ToolGenie";
+const description = "Shrink a PDF for email or uploads without sending the file to a server. What makes PDFs large, what compression actually changes, and how to do it in the browser.";
+const canonicalUrl = "https://toolgenie.online/blog/how-to-compress-a-pdf-without-uploading-it/";
+
+// Structured Data
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonicalUrl
+  },
+  "headline": "How to Compress a PDF Without Uploading It",
+  "description": description,
+  "image": "https://toolgenie.online/og-image.png",
+  "author": {
+    "@type": "Organization",
+    "name": "ToolGenie",
+    "url": "https://toolgenie.online/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ToolGenie",
+    "url": "https://toolgenie.online/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://toolgenie.online/favicon.svg"
+    }
+  },
+  "datePublished": "2026-03-23T12:30:00+00:00",
+  "dateModified": "2026-03-23T12:30:00+00:00",
+  "keywords": [
+    "compress a PDF without uploading",
+    "reduce PDF file size",
+    "compress PDF in browser",
+    "shrink PDF for email",
+    "PDF too large to attach",
+    "client-side PDF compressor"
+  ]
+};
+
+const breadcrumbsJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://toolgenie.online/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://toolgenie.online/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "How to Compress a PDF Without Uploading It",
+      "item": canonicalUrl
+    }
+  ]
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do you compress a PDF without uploading it to a cloud server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "By using a browser utility that executes client-side WebAssembly and JavaScript (like pdf-lib). The tool reads the PDF into local system RAM, downsamples embedded images, cleans duplicate fonts and unused metadata dictionaries, and saves a slimmed copy straight to your downloads without sending any bytes to an external host."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does client-side compression degrade text quality?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. True vector text characters and font glyphs remain completely crisp and searchable. Compression targets embedded photos, scanned bitmap pages, and redundant font subsets."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What should I do if a portal size limit is too strict (e.g., under 1 MB or 2 MB)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Rather than crushing image quality until pages become unreadable, first remove unnecessary blank pages or appendixes, or split the document into smaller multi-file submissions using Split PDF."
+      }
+    }
+  ]
+};
+
+const combinedJsonLd = [articleJsonLd, breadcrumbsJsonLd, faqJsonLd];
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonicalUrl={canonicalUrl}
+  ogType="article"
+  jsonLd={combinedJsonLd}
+>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+    {/* Breadcrumbs Navigation */}
+    <nav class="flex items-center gap-2 text-xs font-semibold mb-8 flex-wrap" aria-label="Breadcrumb" style={{ color: 'var(--text-muted)' }}>
+      <a href="/" class="hover:underline hover:text-[var(--accent)] transition-colors">Home</a>
+      <ChevronRight size={13} />
+      <a href="/blog/" class="hover:underline hover:text-[var(--accent)] transition-colors">Blog</a>
+      <ChevronRight size={13} />
+      <span style={{ color: 'var(--text-primary)' }} class="truncate max-w-[240px] sm:max-w-md">Compress PDF Without Uploading</span>
+    </nav>
+
+    {/* Header / Hero */}
+    <header class="border-b pb-8 mb-10" style={{ borderColor: 'var(--border-subtle)' }}>
+      <div class="flex items-center gap-3 text-xs font-semibold mb-4">
+        <span 
+          class="px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider"
+          style={{
+            backgroundColor: 'var(--bg-input)',
+            color: 'var(--accent)'
+          }}
+        >
+          PDF Optimization & Privacy
+        </span>
+        <span class="flex items-center gap-1" style={{ color: 'var(--text-muted)' }}>
+          <Calendar size={13} />
+          March 23, 2026
+        </span>
+        <span style={{ color: 'var(--text-muted)' }}>•</span>
+        <span class="flex items-center gap-1" style={{ color: 'var(--text-muted)' }}>
+          <Clock size={13} />
+          6 min read (~1,520 words)
+        </span>
+      </div>
+
+      <h1 
+        class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.15] mb-6"
+        style={{ color: 'var(--text-primary)' }}
+      >
+        How to Compress a PDF Without Uploading It
+      </h1>
+
+      <p 
+        class="text-lg sm:text-xl font-medium leading-relaxed"
+        style={{ color: 'var(--text-secondary)' }}
+      >
+        Shrink a PDF for email or uploads without sending the file to a server. Learn what makes PDFs large, what compression actually changes, and how to execute it privately in your browser.
+      </p>
+    </header>
+
+    {/* Quick Feature Callout: Direct Tool Links */}
+    <div 
+      class="rounded-2xl border p-5 sm:p-6 mb-12 shadow-sm"
+      style={{
+        backgroundColor: 'var(--bg-surface)',
+        borderColor: 'var(--border-subtle)'
+      }}
+    >
+      <div class="flex items-center gap-2 mb-3 font-heading font-bold text-sm" style={{ color: 'var(--text-primary)' }}>
+        <Sparkles size={17} class="text-fuchsia-600 dark:text-fuchsia-400" />
+        <span>Featured Client-Side Utilities for This Guide:</span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-semibold">
+        <a 
+          href="/pdf-tools/compress-pdf/"
+          class="flex items-center justify-between p-3 rounded-xl border transition-all duration-200 hover:border-fuchsia-500 hover:shadow-sm"
+          style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-subtle)', color: 'var(--text-primary)' }}
+        >
+          <span class="flex items-center gap-2">
+            <Minimize2 size={15} class="text-fuchsia-600 dark:text-fuchsia-400" />
+            <span>Compress PDF Tool</span>
+          </span>
+          <ArrowRight size={13} style={{ color: 'var(--accent)' }} />
+        </a>
+        <a 
+          href="/pdf-tools/split-pdf/"
+          class="flex items-center justify-between p-3 rounded-xl border transition-all duration-200 hover:border-fuchsia-500 hover:shadow-sm"
+          style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-subtle)', color: 'var(--text-primary)' }}
+        >
+          <span class="flex items-center gap-2">
+            <Scissors size={15} class="text-fuchsia-600 dark:text-fuchsia-400" />
+            <span>Split PDF Tool</span>
+          </span>
+          <ArrowRight size={13} style={{ color: 'var(--accent)' }} />
+        </a>
+        <a 
+          href="/pdf-tools/merge-pdf/"
+          class="flex items-center justify-between p-3 rounded-xl border transition-all duration-200 hover:border-fuchsia-500 hover:shadow-sm"
+          style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-subtle)', color: 'var(--text-primary)' }}
+        >
+          <span class="flex items-center gap-2">
+            <Layers size={15} class="text-fuchsia-600 dark:text-fuchsia-400" />
+            <span>Merge PDF Tool</span>
+          </span>
+          <ArrowRight size={13} style={{ color: 'var(--accent)' }} />
+        </a>
+      </div>
+    </div>
+
+    {/* Main Article Content */}
+    <div 
+      class="prose prose-slate dark:prose-invert max-w-none text-base sm:text-lg leading-relaxed space-y-8"
+      style={{ color: 'var(--text-primary)' }}
+    >
+      <p>
+        A PDF is too large when email rejects the attachment, a form caps uploads at 2 MB, or a shared drive starts to choke. You can <strong>compress a PDF without uploading</strong> it by opening the file in a browser tool that rewrites the document on your own computer, then downloading the smaller copy. Nothing has to leave the device.
+      </p>
+
+      <p>
+        That matters if the file is a contract, a tax return, a scan of an ID, or a slide deck you have not published yet. Most “free compress PDF” sites still send the bytes to a server first. The rest of this guide explains what actually inflates a PDF, what compression can and cannot do, and how to get under a size limit without wrecking the text.
+      </p>
+
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight pt-4" style={{ color: 'var(--text-primary)' }}>
+        Why a PDF balloons in the first place
+      </h2>
+      <p>
+        PDFs are containers. They can hold text, fonts, vector drawings, photos, form fields, and leftover objects from whatever created them. File size is almost never about the number of pages alone.
+      </p>
+      <p>
+        Scanned pages are the usual culprit. A phone photo of a letter, saved as a full-color JPEG and dropped onto an A4 page, can weigh several megabytes per page. Export from PowerPoint or Keynote is the next common source: every screenshot, stock photo, and unused master-slide asset can ride along. Design tools sometimes embed full-resolution images even when the page only shows a thumbnail.
+      </p>
+      <p>
+        Fonts add a smaller but real cost. If the file embeds several type families at high fidelity, that payload sits in the file even when only a few characters appear. Incremental saves, comments, and old revision objects can also leave dead weight. Compression works by attacking those parts, not by magically deleting pages.
+      </p>
+
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight pt-4" style={{ color: 'var(--text-primary)' }}>
+        What “compress” actually does
+      </h2>
+      <p>
+        There is no single compress button in the PDF spec. Tools pick from a handful of techniques:
+      </p>
+      <ul class="space-y-3 list-disc pl-5">
+        <li><strong>Re-encode embedded images:</strong> Convert uncompressed bitmap streams to JPEG or WebP at optimal quality factors.</li>
+        <li><strong>Downsample images:</strong> Reduce image dimensions so a 300 or 600 DPI print scan becomes calibrated for screen viewing (e.g., 150 DPI).</li>
+        <li><strong>Strip unused objects:</strong> Eliminate orphaned objects, duplicate font subsets, and obsolete XML metadata blocks.</li>
+        <li><strong>Rewrite object streams:</strong> Compress cross-reference tables and content dictionaries using Flate/Deflate compression.</li>
+      </ul>
+      <p>
+        Text that is already text (not a picture of text) usually stays sharp. What gets softer is photography and scans. If you need the file for print at arm’s length, aggressive image downsampling will show. If you need it to clear an email cap, that tradeoff is usually acceptable.
+      </p>
+      <p>
+        Some compressors flatten every page into one big image. That can shrink a messy scan, but it also kills selectable text and search. Prefer a tool that recompresses images inside the existing page structure when the document still has real text.
+      </p>
+
+      {/* In-text CTA card */}
+      <div 
+        class="my-8 p-6 rounded-2xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+        style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-subtle)' }}
+      >
+        <div>
+          <h3 class="font-heading font-bold text-base sm:text-lg mb-1" style={{ color: 'var(--text-primary)' }}>
+            Have a PDF too large to attach?
+          </h3>
+          <p class="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+            Shrink your PDF file size locally in your browser. Complete privacy—zero file uploads.
+          </p>
+        </div>
+        <a 
+          href="/pdf-tools/compress-pdf/"
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wide text-white transition-all shadow-sm shrink-0"
+          style={{ backgroundColor: 'var(--accent)' }}
+        >
+          <span>Open Compress PDF</span>
+          <ArrowRight size={14} />
+        </a>
+      </div>
+
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight pt-4" style={{ color: 'var(--text-primary)' }}>
+        Compress in the browser, on your machine
+      </h2>
+      <p>
+        You can <strong>reduce PDF file size</strong> with a free tool like ToolGenie’s <a href="/pdf-tools/compress-pdf/" class="font-semibold underline decoration-fuchsia-500 hover:text-[var(--accent)]">Compress PDF</a> — it runs entirely in your browser. You choose the file from disk, pick a strength, and save the result. The file is read into memory locally; there is no account and no server copy to delete later.
+      </p>
+      <p>
+        A practical sequence:
+      </p>
+      <ol class="space-y-4 list-decimal pl-5 marker:font-bold marker:text-fuchsia-600">
+        <li>
+          <strong>Note the size limits:</strong> Note the current size and the limit you must beat (Gmail attachments are a common 25 MB ceiling; many government and university portals sit at 2–5 MB).
+        </li>
+        <li>
+          <strong>Load your document locally:</strong> Open the compressor and add the PDF into the browser tab.
+        </li>
+        <li>
+          <strong>Test with a balanced preset:</strong> Start with a middle setting. Download and check both size and a couple of image-heavy pages at 100% zoom.
+        </li>
+        <li>
+          <strong>Iterate carefully:</strong> If you are still over the limit, go one step stronger. If type looks muddy, step back and consider splitting the file instead of crushing the images further.
+        </li>
+      </ol>
+      <p>
+        Large files can take a few seconds on an older laptop because the work happens on your CPU. That delay is the cost of not shipping the document off-site.
+      </p>
+
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight pt-4" style={{ color: 'var(--text-primary)' }}>
+        Match the method to the file
+      </h2>
+      <div class="space-y-4 my-6">
+        <div class="p-5 rounded-2xl border" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-subtle)' }}>
+          <h3 class="font-heading font-bold text-base mb-1" style={{ color: 'var(--text-primary)' }}>1. Mostly text, few photos</h3>
+          <p class="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+            These files are already small. Compression may save little. If you are still over a tiny limit, the extra weight is often embedded fonts or a single high-resolution logo. A light pass is enough. Do not flatten pages to images.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl border" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-subtle)' }}>
+          <h3 class="font-heading font-bold text-base mb-1" style={{ color: 'var(--text-primary)' }}>2. Photo-heavy slides or brochures</h3>
+          <p class="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+            Image recompression is where you win. Accept that charts with tiny labels may soften if you push too far. Check one dense slide before you send the pack.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl border" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-subtle)' }}>
+          <h3 class="font-heading font-bold text-base mb-1" style={{ color: 'var(--text-primary)' }}>3. Phone camera scans</h3>
+          <p class="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+            Color scans of black-and-white paper waste space. If the compressor offers a stronger image setting, use it. If the result is still huge, scan again in the phone’s document mode rather than as a camera roll photo, then convert that image to PDF. You can turn a cleaned-up photo into a PDF with a free tool like ToolGenie’s <a href="/pdf-tools/image-to-pdf/" class="font-semibold underline decoration-fuchsia-500">Image to PDF</a> — it runs entirely in your browser — and then compress the new file.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl border" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-subtle)' }}>
+          <h3 class="font-heading font-bold text-base mb-1" style={{ color: 'var(--text-primary)' }}>4. Already merged binders</h3>
+          <p class="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+            Combining ten reports and then compressing once is usually better than compressing each piece first, because shared fonts and objects can be stored once. If you still need to join files first, see our comprehensive guide on <a href="/blog/merge-pdf-without-uploading/" class="font-semibold underline decoration-fuchsia-500 hover:text-[var(--accent)]">How to Merge PDF Files Without Uploading Them</a>.
+          </p>
+        </div>
+      </div>
+
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight pt-4" style={{ color: 'var(--text-primary)' }}>
+        Built-in options on Mac and Windows
+      </h2>
+      <p>
+        You do not always need a dedicated compressor:
+      </p>
+      <ul class="space-y-3 list-disc pl-5">
+        <li><strong>macOS Preview:</strong> Preview can export a slimmer copy: <em>File → Export</em>, then enable the option that optimizes images for screen. It is blunt, but it is local and fast. <em>Print → Save as PDF</em> from some apps also lets you choose a lower quality Quartz filter.</li>
+        <li><strong>Windows:</strong> Microsoft Print to PDF and Word’s “Minimum size” PDF export help when you still have the original document. They will not repair a bloated PDF you only have as a finished file.</li>
+        <li><strong>Adobe Acrobat Pro:</strong> Adobe’s “Reduce File Size” and “PDF Optimizer” remain the most granular desktop tools if you already pay for them. They are overkill for a one-off email attachment.</li>
+        <li><strong>Command-Line Ghostscript:</strong> Ghostscript is powerful for server batches, but it is not a reasonable first step for most people and it is easy to pick a preset that wrecks print quality.</li>
+      </ul>
+
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight pt-4" style={{ color: 'var(--text-primary)' }}>
+        Hitting a hard size cap
+      </h2>
+      <p>
+        When a portal demands 1 MB and your file is 8 MB, compression alone may not get you there without turning pages into mush. Work in this order:
+      </p>
+      <ol class="space-y-3 list-decimal pl-5 marker:font-bold">
+        <li>Compress at a moderate setting and check the new size.</li>
+        <li>Remove pages nobody needs (cover slides, blank backs, appendix scans).</li>
+        <li>Split the remainder. You can split a PDF with a free tool like ToolGenie’s <a href="/pdf-tools/split-pdf/" class="font-semibold underline decoration-fuchsia-500 hover:text-[var(--accent)]">Split PDF</a> — it runs entirely in your browser — and upload the pieces separately if the form allows multiple files.</li>
+        <li>Only then push image quality lower.</li>
+      </ol>
+      <p>
+        If the document is a scan of text, running it through a decent phone scanner app and exporting a new PDF often beats crushing the original photo-PDF.
+      </p>
+
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight pt-4" style={{ color: 'var(--text-primary)' }}>
+        What you should inspect after compression
+      </h2>
+      <p>
+        Open the new file and scan three things:
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
+        <div class="p-4 rounded-xl border" style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-subtle)' }}>
+          <strong class="block text-sm font-bold mb-1 text-fuchsia-600 dark:text-fuchsia-400">1. Body Text Sharpness</strong>
+          <p class="text-xs" style={{ color: 'var(--text-secondary)' }}>Check a page of body text at 100% zoom. Characters should remain crisp if they were true vector fonts.</p>
+        </div>
+        <div class="p-4 rounded-xl border" style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-subtle)' }}>
+          <strong class="block text-sm font-bold mb-1 text-fuchsia-600 dark:text-fuchsia-400">2. Embedded Imagery</strong>
+          <p class="text-xs" style={{ color: 'var(--text-secondary)' }}>Inspect the most detailed photograph, diagram, or screenshot for blocky artifacts or unreadable labels.</p>
+        </div>
+        <div class="p-4 rounded-xl border" style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-subtle)' }}>
+          <strong class="block text-sm font-bold mb-1 text-fuchsia-600 dark:text-fuchsia-400">3. Document Integrity</strong>
+          <p class="text-xs" style={{ color: 'var(--text-secondary)' }}>Confirm that page count matches, hyperlinks work, and form fields remain intact if interactive.</p>
+        </div>
+      </div>
+      <p>
+        Keep the original until the recipient confirms they can open the small copy. Compression is not encryption and it does not remove metadata by itself. If you need names or revision history gone, that is a separate cleanup step.
+      </p>
+
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight pt-4" style={{ color: 'var(--text-primary)' }}>
+        When not to compress
+      </h2>
+      <p>
+        Do not crush a file you still intend to print large, archive as a master, or send to a designer for further edits. Do not flatten a contract if people need to copy clauses. And do not upload a private PDF to a random compressor “just to see the size,” then decide later that the content was sensitive. Decide the privacy bar first.
+      </p>
+      <p>
+        A local, browser-based pass is enough for everyday email and portal limits. Save desktop suites for files that need bookmarks rebuilt, prepress color, or legal-grade redaction.
+      </p>
+    </div>
+
+    {/* Related Tools Footer Section */}
+    <footer class="mt-16 pt-10 border-t" style={{ borderColor: 'var(--border-subtle)' }}>
+      <h3 class="font-heading text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
+        Related Free Client-Side Tools & Articles
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <a 
+          href="/pdf-tools/compress-pdf/"
+          class="p-5 rounded-2xl border transition-all duration-200 hover:shadow-md hover:border-fuchsia-500 flex flex-col justify-between"
+          style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-subtle)' }}
+        >
+          <div>
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center mb-3 text-fuchsia-600 bg-fuchsia-50 dark:bg-fuchsia-950/40">
+              <Minimize2 size={18} />
+            </div>
+            <h4 class="font-heading font-bold text-sm mb-1" style={{ color: 'var(--text-primary)' }}>Compress PDF</h4>
+            <p class="text-xs line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
+              Reduce PDF file size without sacrificing readability or uploading to a cloud server.
+            </p>
+          </div>
+          <div class="mt-4 flex items-center gap-1 text-xs font-bold" style={{ color: 'var(--accent)' }}>
+            <span>Use Tool</span>
+            <ArrowRight size={13} />
+          </div>
+        </a>
+
+        <a 
+          href="/pdf-tools/merge-pdf/"
+          class="p-5 rounded-2xl border transition-all duration-200 hover:shadow-md hover:border-fuchsia-500 flex flex-col justify-between"
+          style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-subtle)' }}
+        >
+          <div>
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center mb-3 text-fuchsia-600 bg-fuchsia-50 dark:bg-fuchsia-950/40">
+              <Layers size={18} />
+            </div>
+            <h4 class="font-heading font-bold text-sm mb-1" style={{ color: 'var(--text-primary)' }}>Merge PDF</h4>
+            <p class="text-xs line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
+              Combine multiple PDF files into one clean document entirely in your browser.
+            </p>
+          </div>
+          <div class="mt-4 flex items-center gap-1 text-xs font-bold" style={{ color: 'var(--accent)' }}>
+            <span>Use Tool</span>
+            <ArrowRight size={13} />
+          </div>
+        </a>
+
+        <a 
+          href="/blog/merge-pdf-without-uploading/"
+          class="p-5 rounded-2xl border transition-all duration-200 hover:shadow-md hover:border-fuchsia-500 flex flex-col justify-between"
+          style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-subtle)' }}
+        >
+          <div>
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center mb-3 text-fuchsia-600 bg-fuchsia-50 dark:bg-fuchsia-950/40">
+              <BookOpen size={18} />
+            </div>
+            <h4 class="font-heading font-bold text-sm mb-1" style={{ color: 'var(--text-primary)' }}>Merge Guide</h4>
+            <p class="text-xs line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
+              How to Merge PDF Files Without Uploading Them: Complete privacy workflow.
+            </p>
+          </div>
+          <div class="mt-4 flex items-center gap-1 text-xs font-bold" style={{ color: 'var(--accent)' }}>
+            <span>Read Guide</span>
+            <ArrowRight size={13} />
+          </div>
+        </a>
+      </div>
+    </footer>
+  </article>
+</Layout>

@@ -74,6 +74,17 @@ const canonical = canonicalUrl || computedCanonical;
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'light');
         }
+
+        // Ensure window.fetch has both getter and setter in iframe / browser extension environments
+        try {
+          var currentFetch = window.fetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() { return currentFetch; },
+            set: function(fn) { currentFetch = fn; },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {}
       })();
     </script>
 
