@@ -1,0 +1,508 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { 
+  ArrowLeft, 
+  Calendar, 
+  Clock, 
+  ShieldCheck, 
+  CheckCircle2, 
+  FileText, 
+  ArrowRight, 
+  ChevronRight, 
+  Cpu, 
+  Lock, 
+  Sparkles, 
+  HelpCircle, 
+  Layers, 
+  Minimize2, 
+  Scissors 
+} from 'lucide-react';
+
+const title = "How to Merge PDF Files Without Uploading Them — ToolGenie";
+const description = "Combine PDFs in your browser. Files stay on your device—no account, no watermark, no server copy. Steps, checks, and common snags.";
+const canonicalUrl = "https://toolgenie.online/blog/merge-pdf-without-uploading/";
+
+// Structured Data
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonicalUrl
+  },
+  "headline": "How to Merge PDF Files Without Uploading Them",
+  "description": description,
+  "image": "https://toolgenie.online/og-image.png",
+  "author": {
+    "@type": "Organization",
+    "name": "ToolGenie",
+    "url": "https://toolgenie.online/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ToolGenie",
+    "url": "https://toolgenie.online/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://toolgenie.online/favicon.svg"
+    }
+  },
+  "datePublished": "2026-03-23T12:00:00+00:00",
+  "dateModified": "2026-03-23T12:00:00+00:00",
+  "keywords": [
+    "merge PDF without uploading",
+    "combine PDF files",
+    "merge PDFs in browser",
+    "private PDF merger",
+    "join PDF files",
+    "client-side PDF merge"
+  ]
+};
+
+const breadcrumbsJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://toolgenie.online/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://toolgenie.online/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "How to Merge PDF Files Without Uploading Them",
+      "item": canonicalUrl
+    }
+  ]
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can you merge PDF files without uploading them to a remote server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Modern web browsers can parse, stitch, and render PDF pages directly inside local RAM using client-side JavaScript and WebAssembly (such as pdf-lib). Your files never leave your computer or phone."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I verify that my files are not being uploaded?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open your browser Developer Tools (F12 or right-click Inspect), switch to the Network tab, and perform the merge. No outbound payload containing your document data will be transmitted. You can even disconnect your Wi-Fi after the page loads and the merge will still work."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do some merged PDFs become huge?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "High-DPI scanner output, embedded uncompressed bitmap scans, and high-resolution images inflate file sizes quickly. Run the combined file through a client-side compressor to optimize stream dictionary sizes and images."
+      }
+    }
+  ]
+};
+
+const combinedJsonLd = [articleJsonLd, breadcrumbsJsonLd, faqJsonLd];
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonicalUrl={canonicalUrl}
+  ogType="article"
+  jsonLd={combinedJsonLd}
+>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+    {/* Breadcrumbs Navigation */}
+    <nav class="flex items-center gap-2 text-xs font-semibold mb-8 flex-wrap" aria-label="Breadcrumb" style={{ color: 'var(--text-muted)' }}>
+      <a href="/" class="hover:underline hover:text-[var(--accent)] transition-colors">Home</a>
+      <ChevronRight size={13} />
+      <a href="/blog/" class="hover:underline hover:text-[var(--accent)] transition-colors">Blog</a>
+      <ChevronRight size={13} />
+      <span style={{ color: 'var(--text-primary)' }} class="truncate max-w-[240px] sm:max-w-md">Merge PDF Without Uploading</span>
+    </nav>
+
+    {/* Header / Hero */}
+    <header class="border-b pb-8 mb-10" style={{ borderColor: 'var(--border-subtle)' }}>
+      <div class="flex items-center gap-3 text-xs font-semibold mb-4">
+        <span 
+          class="px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider"
+          style={{
+            backgroundColor: 'var(--bg-input)',
+            color: 'var(--accent)'
+          }}
+        >
+          PDF Security & Privacy
+        </span>
+        <span class="flex items-center gap-1" style={{ color: 'var(--text-muted)' }}>
+          <Calendar size={13} />
+          March 23, 2026
+        </span>
+        <span style={{ color: 'var(--text-muted)' }}>•</span>
+        <span class="flex items-center gap-1" style={{ color: 'var(--text-muted)' }}>
+          <Clock size={13} />
+          6 min read (~1,450 words)
+        </span>
+      </div>
+
+      <h1 
+        class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.15] mb-6"
+        style={{ color: 'var(--text-primary)' }}
+      >
+        How to Merge PDF Files Without Uploading Them
+      </h1>
+
+      <p 
+        class="text-lg sm:text-xl font-medium leading-relaxed"
+        style={{ color: 'var(--text-secondary)' }}
+      >
+        Combine PDFs in your browser. Files stay on your device—no account, no watermark, no server copy. Learn the exact steps, verification checks, and fixes for common snags.
+      </p>
+    </header>
+
+    {/* Quick Feature Callout: Direct Tool Links */}
+    <div 
+      class="rounded-2xl border p-5 sm:p-6 mb-12 shadow-sm"
+      style={{
+        backgroundColor: 'var(--bg-surface)',
+        borderColor: 'var(--border-subtle)'
+      }}
+    >
+      <div class="flex items-center gap-2 mb-3 font-heading font-bold text-sm" style={{ color: 'var(--text-primary)' }}>
+        <Sparkles size={17} class="text-fuchsia-600 dark:text-fuchsia-400" />
+        <span>Featured Client-Side Utilities for This Guide:</span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-semibold">
+        <a 
+          href="/pdf-tools/merge-pdf/"
+          class="flex items-center justify-between p-3 rounded-xl border transition-all duration-200 hover:border-fuchsia-500 hover:shadow-sm"
+          style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-subtle)', color: 'var(--text-primary)' }}
+        >
+          <span class="flex items-center gap-2">
+            <Layers size={15} class="text-fuchsia-600 dark:text-fuchsia-400" />
+            <span>Merge PDF Tool</span>
+          </span>
+          <ArrowRight size={13} style={{ color: 'var(--accent)' }} />
+        </a>
+        <a 
+          href="/pdf-tools/compress-pdf/"
+          class="flex items-center justify-between p-3 rounded-xl border transition-all duration-200 hover:border-fuchsia-500 hover:shadow-sm"
+          style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-subtle)', color: 'var(--text-primary)' }}
+        >
+          <span class="flex items-center gap-2">
+            <Minimize2 size={15} class="text-fuchsia-600 dark:text-fuchsia-400" />
+            <span>Compress PDF Tool</span>
+          </span>
+          <ArrowRight size={13} style={{ color: 'var(--accent)' }} />
+        </a>
+        <a 
+          href="/pdf-tools/split-pdf/"
+          class="flex items-center justify-between p-3 rounded-xl border transition-all duration-200 hover:border-fuchsia-500 hover:shadow-sm"
+          style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-subtle)', color: 'var(--text-primary)' }}
+        >
+          <span class="flex items-center gap-2">
+            <Scissors size={15} class="text-fuchsia-600 dark:text-fuchsia-400" />
+            <span>Split PDF Tool</span>
+          </span>
+          <ArrowRight size={13} style={{ color: 'var(--accent)' }} />
+        </a>
+      </div>
+    </div>
+
+    {/* Main Article Content */}
+    <div 
+      class="prose prose-slate dark:prose-invert max-w-none text-base sm:text-lg leading-relaxed space-y-8"
+      style={{ color: 'var(--text-primary)' }}
+    >
+      <p>
+        You can <strong>merge PDF without uploading</strong> them by using a browser tool that reads the files into memory on your own machine, stitches the pages together there, and saves a new file to your downloads. Nothing has to travel to a company’s server. That is the whole difference between a <strong>private PDF merger</strong> and the “free online merger” that asks you to drop contracts into a cloud queue.
+      </p>
+
+      <p>
+        Most people search “merge PDF” because they have three or four documents and one recipient. A job packet. A signed lease plus ID scans. A report and its appendix. The job is simple. The risk is not, if those files contain names, account numbers, or unpublished work.
+      </p>
+
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight pt-4" style={{ color: 'var(--text-primary)' }}>
+        What “online merge” usually means
+      </h2>
+      <p>
+        A typical web merger works like this: you pick files, the site sends the raw bytes across the internet to a remote data center, software on that backend server writes a new PDF, and then you download it back. The provider’s privacy page then tells you the originals are deleted after some number of hours or days.
+      </p>
+      <p>
+        That model is convenient on a weak legacy laptop, but it also creates an unencrypted or cached copy of your document sitting on hardware you do not control, in a jurisdiction you may not know, for a window of time you cannot verify. For a public event flyer, that may not matter. For a tax return, bank statement, or confidential medical record, it matters immensely.
+      </p>
+      <p>
+        A local, <strong>client-side PDF merge</strong> skips the middleman entirely. The web page assets load once. After that, your browser tab does the heavy lifting. You can confirm it yourself: open your browser’s Developer Tools, switch to the <em>Network</em> tab, run the merge, and watch whether any request carries your file payload over the wire.
+      </p>
+
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight pt-4" style={{ color: 'var(--text-primary)' }}>
+        How a browser merge actually works
+      </h2>
+      <p>
+        When you add files to a modern <strong>in-browser PDF merger</strong>, the browser reads the file from local storage into system RAM using the standard HTML5 File and FileReader APIs. Specialized client libraries such as <code>pdf-lib</code> (often accelerated by WebAssembly) parse the PDF cross-reference tables, allocate a fresh PDF document object, and copy page trees from each source file into the destination container.
+      </p>
+      <p>
+        Your tab then creates an in-memory <code>Blob</code> and exposes it directly as a native browser download stream. The originals on your disk are never rewritten or altered in place.
+      </p>
+      <p>
+        Because no backend servers are involved, operational limits come from your physical device, not an artificial free-tier paywall. A budget phone with limited free RAM might struggle to unpack a 400-page high-resolution scan, whereas a standard desktop computer will breeze through hundreds of pages in seconds. There is no daily cap or queue imposed by a server, because there is no server step.
+      </p>
+
+      {/* In-text CTA card */}
+      <div 
+        class="my-8 p-6 rounded-2xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+        style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-subtle)' }}
+      >
+        <div>
+          <h3 class="font-heading font-bold text-base sm:text-lg mb-1" style={{ color: 'var(--text-primary)' }}>
+            Need to combine PDF files right now?
+          </h3>
+          <p class="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+            Merge multiple PDF documents safely in your browser tab without uploading a single byte.
+          </p>
+        </div>
+        <a 
+          href="/pdf-tools/merge-pdf/"
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wide text-white transition-all shadow-sm shrink-0"
+          style={{ backgroundColor: 'var(--accent)' }}
+        >
+          <span>Open Merge PDF</span>
+          <ArrowRight size={14} />
+        </a>
+      </div>
+
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight pt-4" style={{ color: 'var(--text-primary)' }}>
+        Step-by-step: How to merge PDFs privately
+      </h2>
+      <ol class="space-y-4 list-decimal pl-5 marker:font-bold marker:text-fuchsia-600">
+        <li>
+          <strong>Collect and name your source files:</strong> Gather the exact documents you need in the final compilation. Rename them numerically or chronologically (e.g., <code>01-cover.pdf</code>, <code>02-contract-body.pdf</code>, <code>03-appendix.pdf</code>). Default alphabetical sorting has ruined more document packets than faulty scanners.
+        </li>
+        <li>
+          <strong>Unlock password-protected files:</strong> Encrypted or permission-locked PDFs cannot be read by browser parsers until you remove the password. Open the file in your system PDF viewer, enter your password, and save an unlocked copy to disk before merging.
+        </li>
+        <li>
+          <strong>Open a client-side merger:</strong> Launch the tool in Chrome, Firefox, Edge, Safari, or Brave. There is no installation required and no account creation.
+        </li>
+        <li>
+          <strong>Select or drop your files:</strong> Drag and drop your PDFs directly onto the dropzone, or browse using the file selector. Confirm that the thumbnail previews and page counts match your expectations.
+        </li>
+        <li>
+          <strong>Reorder pages and documents:</strong> Drag the files into your intended reading sequence. Put the cover letter first and the appendix last. If one of your source files contains extra junk pages, extract only the required section using a client-side <a href="/pdf-tools/split-pdf/" class="font-semibold underline decoration-fuchsia-500 hover:text-[var(--accent)]">Split PDF tool</a> before combining.
+        </li>
+        <li>
+          <strong>Execute the merge:</strong> Click the merge button. For small and medium files, this process is practically instantaneous. Large image-heavy scans take a few seconds because the workload relies on your device’s local CPU and RAM rather than internet upload bandwidth.
+        </li>
+        <li>
+          <strong>Inspect the generated document:</strong> Open the downloaded file immediately and flip through it. Verify the transition between files, inspect the final page, and confirm that landscape exhibits did not rotate sideways.
+        </li>
+        <li>
+          <strong>Compress if required for email attachments:</strong> If the final compilation exceeds email file size limits (frequently 10MB to 25MB), compress the file after merging rather than compressing every individual piece beforehand. Running a single pass on the finished packet produces better consistency. You can shrink the file easily with ToolGenie's free <a href="/pdf-tools/compress-pdf/" class="font-semibold underline decoration-fuchsia-500 hover:text-[var(--accent)]">Compress PDF tool</a> running 100% in your browser.
+        </li>
+      </ol>
+
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight pt-4" style={{ color: 'var(--text-primary)' }}>
+        Built-in options if you never want a website
+      </h2>
+      <p>
+        If company policy forbids using any web browser utility for documents, your operating system offers several offline alternatives:
+      </p>
+      <ul class="space-y-3 list-disc pl-5">
+        <li>
+          <strong>macOS Preview:</strong> Open the first PDF in Apple Preview, open the sidebar (<em>View → Thumbnails</em>), drag the other PDF files into the sidebar list at the desired position, and select <em>File → Export as PDF</em>. Be sure to use Export rather than Save to avoid overwriting your original document.
+        </li>
+        <li>
+          <strong>Windows:</strong> File Explorer does not include a native batch PDF merger out of the box. Windows users commonly turn to open-source utilities like PDFsam Basic, offline toolkits like PDF24 Creator, or subscription suites like Adobe Acrobat Pro. For quick zero-install jobs, an in-browser local merger is substantially faster.
+        </li>
+        <li>
+          <strong>Mobile Devices (iOS & Android):</strong> Native mobile file managers have limited merging capabilities. Modern mobile browsers can run client-side mergers seamlessly, though heavy 300+ page scans may cause thermal throttling or tab refreshes if the browser is backgrounded. For standard 10–20 page packets, mobile browser merging works reliably.
+        </li>
+        <li>
+          <strong>Command-Line Utilities:</strong> Power users and automated workflows benefit from command-line tools like <code>qpdf</code>, <code>pdftk</code>, or Python’s <code>pypdf</code>. These are ideal for recurring batch operations, though impractical for one-off tasks if not already installed.
+        </li>
+      </ul>
+
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight pt-4" style={{ color: 'var(--text-primary)' }}>
+        Order, rotation, and split-then-merge strategies
+      </h2>
+      <p>
+        Ordering is the most critical element of document stitching. If a page lands in the wrong sequence, the recipient will notice immediately. If one of your source files is a mixed bundle—for instance, a 50-page packet where only pages 12 through 15 are relevant—do not merge the entire stack. Extract the specific range with <a href="/pdf-tools/split-pdf/" class="font-semibold underline decoration-fuchsia-500 hover:text-[var(--accent)]">ToolGenie’s Split PDF</a>, and stitch only the relevant section.
+      </p>
+      <p>
+        Similarly, scanner pages that were digitized upside down or sideways should be rotated before merging. While simple page concatenations preserve text streams, form fields and complex interactive bookmarks do not always survive basic page copying. If your workflow requires fillable AcroForms or dynamic PDF calculations, utilize a specialized PDF editor.
+      </p>
+
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight pt-4" style={{ color: 'var(--text-primary)' }}>
+        When the merge fails or the file is huge: Troubleshooting
+      </h2>
+      <div 
+        class="rounded-2xl border p-6 space-y-4"
+        style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-subtle)' }}
+      >
+        <div class="flex items-start gap-3">
+          <CheckCircle2 size={18} class="text-emerald-500 shrink-0 mt-1" />
+          <div>
+            <strong class="block text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Password locked on input file:</strong>
+            <span class="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+              If a bank or payroll slip has a view or owner password, the client reader cannot unpack the streams. Open it in your desktop viewer, print or save to an unencrypted PDF, then retry.
+            </span>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <CheckCircle2 size={18} class="text-emerald-500 shrink-0 mt-1" />
+          <div>
+            <strong class="block text-sm font-bold" style={{ color: 'var(--text-primary)' }}>File is not a valid PDF:</strong>
+            <span class="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+              Occasionally scanned JPEGs or PNGs are saved with a <code>.pdf</code> extension by misconfigured scanners. Convert the raw images to legitimate PDF pages first using an image-to-PDF tool.
+            </span>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <CheckCircle2 size={18} class="text-emerald-500 shrink-0 mt-1" />
+          <div>
+            <strong class="block text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Resulting file exceeds email attachment caps:</strong>
+            <span class="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+              600 DPI full-color scans multiply in size quickly. Run your combined PDF through <a href="/pdf-tools/compress-pdf/" class="font-semibold underline decoration-fuchsia-500">Compress PDF</a> to re-encode heavy bitmap objects and eliminate duplicate embedded fonts.
+            </span>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <CheckCircle2 size={18} class="text-emerald-500 shrink-0 mt-1" />
+          <div>
+            <strong class="block text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Browser tab runs out of memory:</strong>
+            <span class="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+              On mobile or low-spec hardware, stitching 50 individual PDFs simultaneously can trigger the browser tab's memory ceiling. Work in batches: combine files 1–5, then files 6–10, and finally merge the two combined sub-files.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight pt-4" style={{ color: 'var(--text-primary)' }}>
+        How to tell a tool is actually local (The 5-Point Test)
+      </h2>
+      <p>
+        Marketing copy often claims "100% Secure" while quietly sending your documents to a cloud cluster. Here is how you can independently verify whether a utility is truly executing on your device:
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+        <div class="p-4 rounded-xl border" style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-subtle)' }}>
+          <strong class="block text-sm font-bold mb-1 text-fuchsia-600 dark:text-fuchsia-400">1. Inspect the Network Tab</strong>
+          <p class="text-xs" style={{ color: 'var(--text-secondary)' }}>Open DevTools (F12) and check Network activity during processing. There should be zero outbound POST requests carrying document data.</p>
+        </div>
+        <div class="p-4 rounded-xl border" style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-subtle)' }}>
+          <strong class="block text-sm font-bold mb-1 text-fuchsia-600 dark:text-fuchsia-400">2. Disconnect Wi-Fi Test</strong>
+          <p class="text-xs" style={{ color: 'var(--text-secondary)' }}>Load the tool page, turn on Airplane mode, drop in your files, and click Merge. A truly client-side application will finish without internet.</p>
+        </div>
+        <div class="p-4 rounded-xl border" style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-subtle)' }}>
+          <strong class="block text-sm font-bold mb-1 text-fuchsia-600 dark:text-fuchsia-400">3. Zero Account Gatekeeping</strong>
+          <p class="text-xs" style={{ color: 'var(--text-secondary)' }}>No mandatory email capture or account registration before downloading the combined document.</p>
+        </div>
+        <div class="p-4 rounded-xl border" style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-subtle)' }}>
+          <strong class="block text-sm font-bold mb-1 text-fuchsia-600 dark:text-fuchsia-400">4. No Watermarks or Meters</strong>
+          <p class="text-xs" style={{ color: 'var(--text-secondary)' }}>Zero brand stamps stamped onto your pages and no "2 tasks remaining today" artificial paywalls.</p>
+        </div>
+      </div>
+
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight pt-4" style={{ color: 'var(--text-primary)' }}>
+        A sane default workflow
+      </h2>
+      <p>
+        A reliable and private PDF workflow takes less than a minute once you follow a consistent sequence:
+      </p>
+      <ol class="space-y-2 list-decimal pl-5 marker:font-bold">
+        <li>Standardize the filenames so reading order is immediately visible.</li>
+        <li>Split out and discard irrelevant pages using <a href="/pdf-tools/split-pdf/" class="font-semibold underline decoration-fuchsia-500">Split PDF</a>.</li>
+        <li>Stitch your pages in memory with <a href="/pdf-tools/merge-pdf/" class="font-semibold underline decoration-fuchsia-500">Merge PDF</a>.</li>
+        <li>Preview the output in your PDF reader to verify pagination and landscape orientation.</li>
+        <li>If sending via email, compress the final document with <a href="/pdf-tools/compress-pdf/" class="font-semibold underline decoration-fuchsia-500">Compress PDF</a>.</li>
+        <li>Rename the final download to something descriptive (e.g., <code>smith-application-packet-2026.pdf</code> instead of <code>merged.pdf</code>).</li>
+      </ol>
+      <p>
+        That sequence handles virtually every document submission request cleanly, quickly, and without handing your sensitive personal data to a remote third party.
+      </p>
+    </div>
+
+    {/* Related Tools Footer Section */}
+    <footer class="mt-16 pt-10 border-t" style={{ borderColor: 'var(--border-subtle)' }}>
+      <h3 class="font-heading text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
+        Related Free Client-Side Tools
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <a 
+          href="/pdf-tools/merge-pdf/"
+          class="p-5 rounded-2xl border transition-all duration-200 hover:shadow-md hover:border-fuchsia-500 flex flex-col justify-between"
+          style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-subtle)' }}
+        >
+          <div>
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center mb-3 text-fuchsia-600 bg-fuchsia-50 dark:bg-fuchsia-950/40">
+              <Layers size={18} />
+            </div>
+            <h4 class="font-heading font-bold text-sm mb-1" style={{ color: 'var(--text-primary)' }}>Merge PDF</h4>
+            <p class="text-xs line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
+              Combine multiple PDF files into one clean document entirely in your browser.
+            </p>
+          </div>
+          <div class="mt-4 flex items-center gap-1 text-xs font-bold" style={{ color: 'var(--accent)' }}>
+            <span>Use Tool</span>
+            <ArrowRight size={13} />
+          </div>
+        </a>
+
+        <a 
+          href="/pdf-tools/compress-pdf/"
+          class="p-5 rounded-2xl border transition-all duration-200 hover:shadow-md hover:border-fuchsia-500 flex flex-col justify-between"
+          style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-subtle)' }}
+        >
+          <div>
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center mb-3 text-fuchsia-600 bg-fuchsia-50 dark:bg-fuchsia-950/40">
+              <Minimize2 size={18} />
+            </div>
+            <h4 class="font-heading font-bold text-sm mb-1" style={{ color: 'var(--text-primary)' }}>Compress PDF</h4>
+            <p class="text-xs line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
+              Reduce PDF file size without sacrificing readability or uploading to a cloud server.
+            </p>
+          </div>
+          <div class="mt-4 flex items-center gap-1 text-xs font-bold" style={{ color: 'var(--accent)' }}>
+            <span>Use Tool</span>
+            <ArrowRight size={13} />
+          </div>
+        </a>
+
+        <a 
+          href="/pdf-tools/split-pdf/"
+          class="p-5 rounded-2xl border transition-all duration-200 hover:shadow-md hover:border-fuchsia-500 flex flex-col justify-between"
+          style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-subtle)' }}
+        >
+          <div>
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center mb-3 text-fuchsia-600 bg-fuchsia-50 dark:bg-fuchsia-950/40">
+              <Scissors size={18} />
+            </div>
+            <h4 class="font-heading font-bold text-sm mb-1" style={{ color: 'var(--text-primary)' }}>Split PDF</h4>
+            <p class="text-xs line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
+              Extract specific page ranges or split a large document into individual files.
+            </p>
+          </div>
+          <div class="mt-4 flex items-center gap-1 text-xs font-bold" style={{ color: 'var(--accent)' }}>
+            <span>Use Tool</span>
+            <ArrowRight size={13} />
+          </div>
+        </a>
+      </div>
+    </footer>
+  </article>
+</Layout>

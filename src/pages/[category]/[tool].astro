@@ -13,7 +13,8 @@ import {
   CheckCircle2, 
   HelpCircle, 
   Lock,
-  ArrowRight
+  ArrowRight,
+  BookOpen
 } from 'lucide-react';
 
 export async function getStaticPaths() {
@@ -354,6 +355,34 @@ const combinedJsonLd = [breadcrumbsSchema, appSchema, ...(faqSchema ? [faqSchema
               </p>
             </details>
           ))}
+        </div>
+      </section>
+    )}
+
+    {/* Related In-Depth Guide (Internal Linking for PDF Pillar) */}
+    {category.slug === 'pdf-tools' && (
+      <section class="mb-16">
+        <div class="rounded-2xl border p-6 sm:p-7 flex flex-col md:flex-row md:items-center justify-between gap-6 transition-all duration-200" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-subtle)' }}>
+          <div class="max-w-2xl">
+            <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase tracking-wider mb-2.5" style={{ backgroundColor: 'var(--bg-input)', color: 'var(--accent)' }}>
+              <BookOpen size={13} />
+              <span>In-Depth Architecture Guide</span>
+            </div>
+            <h3 class="font-heading text-xl sm:text-2xl font-bold tracking-tight mb-2" style={{ color: 'var(--text-primary)' }}>
+              How to Merge PDF Files Without Uploading Them
+            </h3>
+            <p class="text-xs sm:text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+              Learn how client-side PDF processing works in browser RAM, step-by-step assembly, how to inspect network calls in DevTools, and how to troubleshoot large files.
+            </p>
+          </div>
+          <a
+            href="/blog/merge-pdf-without-uploading/"
+            class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white transition-all shadow-sm shrink-0"
+            style={{ backgroundColor: 'var(--accent)' }}
+          >
+            <span>Read Guide</span>
+            <ArrowRight size={14} />
+          </a>
         </div>
       </section>
     )}

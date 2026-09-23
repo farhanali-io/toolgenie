@@ -4,28 +4,12 @@ import { BookOpen, Calendar, Clock, ArrowRight, ArrowLeft } from 'lucide-react';
 
 const blogPosts = [
   {
-    slug: 'why-client-side-processing-is-the-future',
-    title: 'Why Client-Side Processing Is the Future of Web Utilities',
-    excerpt: 'Uploading confidential PDFs and images to remote servers for simple edits is an outdated security risk. Here is how modern browsers replaced cloud converters.',
-    category: 'Privacy & Architecture',
-    date: 'February 18, 2026',
-    readTime: '4 min read'
-  },
-  {
-    slug: 'how-webassembly-powers-in-browser-pdf-tools',
-    title: 'How WebAssembly Powers Native-Speed PDF Merging and Splitting in Browser Tabs',
-    excerpt: 'Deep dive into how compiled WASM binaries execute complex byte-level document manipulations entirely in browser memory without sending a single byte over the wire.',
-    category: 'Engineering',
-    date: 'February 12, 2026',
+    slug: 'merge-pdf-without-uploading',
+    title: 'How to Merge PDF Files Without Uploading Them',
+    excerpt: 'Combine PDFs in your browser. Files stay on your device—no account, no watermark, no server copy. Steps, checks, and common snags.',
+    category: 'Guides & Privacy',
+    date: 'March 23, 2026',
     readTime: '6 min read'
-  },
-  {
-    slug: 'lossless-vs-lossy-image-compression-guide',
-    title: 'Lossless vs Lossy Image Compression: How to Balance File Size and Quality',
-    excerpt: 'An engineer’s guide to quantization, chroma subsampling, and canvas image manipulation algorithms for optimal web performance.',
-    category: 'Tutorials',
-    date: 'January 29, 2026',
-    readTime: '5 min read'
   }
 ];
 ---
@@ -116,7 +100,7 @@ const blogPosts = [
           </p>
 
           <a
-            href="/"
+            href={`/blog/${post.slug}/`}
             class="inline-flex items-center gap-1.5 text-xs font-bold hover:underline"
             style={{ color: 'var(--accent)' }}
           >
