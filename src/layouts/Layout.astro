@@ -19,15 +19,10 @@ const {
   jsonLd,
 } = Astro.props;
 
-// Compute clean canonical URL:
-// 1. Always use absolute URL with https:// (Astro.site is https://toolgenie.online)
-// 2. Always use non-www version
-// 3. Strip query strings and hash fragments (Astro.url.pathname only contains path)
-// 4. Strip trailing slashes EXCEPT for homepage: / stays /, /about/ becomes /about
 const siteBase = (Astro.site ? Astro.site.origin : 'https://toolgenie.online').replace(/\/+$/, '');
-const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const pathname = Astro.url.pathname;
 const computedCanonical = pathname === '/' ? `${siteBase}/` : `${siteBase}${pathname}`;
-const canonical = canonicalUrl ? (canonicalUrl === 'https://toolgenie.online' ? 'https://toolgenie.online/' : canonicalUrl.replace(/\/+$/, '')) : computedCanonical;
+const canonical = canonicalUrl || computedCanonical;
 ---
 
 <!doctype html>
@@ -37,6 +32,8 @@ const canonical = canonicalUrl ? (canonicalUrl === 'https://toolgenie.online' ? 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     
     <title>{title}</title>
@@ -49,6 +46,10 @@ const canonical = canonicalUrl ? (canonicalUrl === 'https://toolgenie.online' ? 
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="ToolGenie" />
+    <meta property="og:image" content="https://toolgenie.online/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:image" content="https://toolgenie.online/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -73,35 +74,6 @@ const canonical = canonicalUrl ? (canonicalUrl === 'https://toolgenie.online' ? 
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'light');
         }
-
-        // Defensive patch for fetch getters in third-party extensions
-        try {
-          var _origFetch = window.fetch;
-          var _currentFetch = _origFetch ? _origFetch.bind(window) : _origFetch;
-          Object.defineProperty(window, 'fetch', {
-            get: function() { return _currentFetch; },
-            set: function(fn) { _currentFetch = fn; },
-            configurable: true,
-            enumerable: true
-          });
-        } catch (e) {}
-
-        // Defensive patch for WebSocket/HMR environments where ws transport or send may be uninitialized
-        try {
-          if (typeof window !== 'undefined') {
-            window.addEventListener('error', function(event) {
-              if (event && event.message && event.message.indexOf("reading 'send'") !== -1) {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-            }, true);
-            window.addEventListener('unhandledrejection', function(event) {
-              if (event && event.reason && event.reason.message && event.reason.message.indexOf("reading 'send'") !== -1) {
-                event.preventDefault();
-              }
-            });
-          }
-        } catch (e) {}
       })();
     </script>
 
