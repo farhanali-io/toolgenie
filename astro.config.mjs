@@ -11,6 +11,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   output: 'static',
   site: 'https://toolgenie.online',
+  trailingSlash: 'always',
   server: {
     port: 3000,
     host: '0.0.0.0',
