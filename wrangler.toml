@@ -1,4 +1,6 @@
-name = "toolgenie" # or face-analyzer-new for the other repo - MUST be different
+name = "toolgenie"
+compatibility_date = "2026-10-03"
+compatibility_flags = ["nodejs_compat"]
 
 [assets]
 directory = "./dist"
