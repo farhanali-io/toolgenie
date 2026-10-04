@@ -5,18 +5,3 @@ compatibility_date = "2026-10-03"
 directory = "./dist"
 not_found_handling = "404-page"
 html_handling = "auto-trailing-slash"
-
-[[assets.redirects]]
-from = "/terms/"
-to = "/terms-of-use/"
-status = 301
-
-[[assets.redirects]]
-from = "/terms"
-to = "/terms-of-use/"
-status = 301
-
-[[assets.redirects]]
-from = "/index.html"
-to = "/"
-status = 301
