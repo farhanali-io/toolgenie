@@ -1,13 +1,5 @@
-# 1. www and http to https non-www - MUST be first
-https://www.toolgenie.online/* https://toolgenie.online/:splat 301!
-http://www.toolgenie.online/* https://toolgenie.online/:splat 301!
-http://toolgenie.online/* https://toolgenie.online/:splat 301!
-
-# 2. .html to clean URL - 301 (must be before catch-all)
-#index and generic .html
-/index.html / 301!
-/*.html /:splat/ 301!
-
-# 3. Specific path redirects
-/terms/ /terms-of-use/ 301!
-/terms /terms-of-use/ 301!
+# .html to clean URL - relative only, no !
+/index.html / 301
+/*.html /:splat/ 301
+/terms/ /terms-of-use/ 301
+/terms /terms-of-use/ 301
