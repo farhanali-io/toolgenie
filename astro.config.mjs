@@ -12,13 +12,25 @@ export default defineConfig({
   output: 'static',
   site: 'https://toolgenie.online',
   trailingSlash: 'always',
+  build: {
+    format: 'directory',
+  },
   server: {
     port: 3000,
     host: '0.0.0.0',
   },
   integrations: [
     react(),
-    sitemap(),
+    sitemap({
+      filter: (page) => !page.endsWith('.html') && !page.includes('/index.html'),
+      serialize(item) {
+        item.url = item.url.replace(/\.html\/?$/, '/');
+        if (!item.url.endsWith('/')) {
+          item.url += '/';
+        }
+        return item;
+      }
+    }),
   ],
   vite: {
     plugins: [
@@ -28,10 +40,24 @@ export default defineConfig({
         apply: 'serve',
         transform(code, id) {
           if (id.includes('/@vite/client') || id.includes('vite/dist/client/client.mjs') || id.includes('vite/dist/client/bundledDevClient.mjs')) {
-            return code.replaceAll(
-              'wsTransport.send(data);',
-              'wsTransport?.send?.(data);'
+            let res = code;
+            res = res.replaceAll(
+              'ws.send(JSON.stringify(data));',
+              'if (ws && ws.readyState === 1) { try { ws.send(JSON.stringify(data)); } catch {} }'
             );
+            res = res.replaceAll(
+              'wsTransport.send(data);',
+              'try { wsTransport?.send?.(data); } catch {}'
+            );
+            res = res.replaceAll(
+              'wsTransport?.send?.(data);',
+              'try { wsTransport?.send?.(data); } catch {}'
+            );
+            res = res.replaceAll(
+              'this.transport.send(payload).catch((err) => {',
+              'try { const _p = this.transport?.send?.(payload); if (_p && typeof _p.catch === "function") _p.catch(() => {}); } catch {} // '
+            );
+            return res;
           }
           return null;
         }

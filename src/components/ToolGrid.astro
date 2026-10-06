@@ -36,7 +36,7 @@ const displayedCategories: CategoryItem[] = selectedCategory === 'all'
                 style={`background-color: ${category.accentColor};`} 
               />
               <a
-                href={`/${category.slug}`}
+                href={`/${category.slug}/`}
                 class="font-heading text-2xl sm:text-3xl font-extrabold tracking-tight hover:underline transition-all"
                 style="color: var(--text-primary);"
               >
@@ -60,7 +60,7 @@ const displayedCategories: CategoryItem[] = selectedCategory === 'all'
           {/* View all link linking to that category page */}
           <a
             id={`view-all-${category.slug}`}
-            href={`/${category.slug}`}
+            href={`/${category.slug}/`}
             class="inline-flex items-center gap-1.5 text-xs font-bold tracking-wide transition-all group shrink-0 hover:underline"
             style={`color: ${category.accentColor};`}
           >
@@ -73,7 +73,7 @@ const displayedCategories: CategoryItem[] = selectedCategory === 'all'
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
           {category.tools.map((tool) => (
             <a
-              href={`/${category.slug}/${tool.slug}`}
+              href={`/${category.slug}/${tool.slug}/`}
               class="block focus:outline-none"
             >
               <ToolCard
@@ -93,7 +93,7 @@ const displayedCategories: CategoryItem[] = selectedCategory === 'all'
         {/* Section Bottom Footer Link */}
         <div class="flex justify-end pt-2">
           <a
-            href={`/${category.slug}`}
+            href={`/${category.slug}/`}
             class="inline-flex items-center gap-1.5 text-xs font-semibold hover:underline"
             style={`color: ${category.accentColor};`}
           >

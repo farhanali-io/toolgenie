@@ -31,7 +31,7 @@ const popularTools = (getPopularTools() as ToolItem[]).filter(Boolean);
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
     {popularTools.map((tool) => (
       <a
-        href={`/${tool.categorySlug}/${tool.slug}`}
+        href={`/${tool.categorySlug}/${tool.slug}/`}
         class="block focus:outline-none"
       >
         <ToolCard

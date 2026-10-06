@@ -36,7 +36,7 @@ const howToSteps = getToolHowToSteps(tool);
 
 const pageTitle = `${tool.name} — Free 100% Client-Side Tool | ToolGenie`;
 const pageDescription = tool.longDescription || tool.shortDescription;
-const canonicalUrl = `https://toolgenie.online/${category.slug}/${tool.slug}`;
+const canonicalUrl = `https://toolgenie.online/${category.slug}/${tool.slug}/`;
 
 // Related tools from same category (excluding current tool)
 const relatedTools = category.tools
@@ -413,7 +413,7 @@ const combinedJsonLd = [breadcrumbsSchema, appSchema, ...(faqSchema ? [faqSchema
             </p>
           </div>
           <a
-            href={`/${category.slug}`}
+            href={`/${category.slug}/`}
             class="text-xs font-bold hover:underline"
             style={{ color: category.accentColor }}
           >
@@ -424,7 +424,7 @@ const combinedJsonLd = [breadcrumbsSchema, appSchema, ...(faqSchema ? [faqSchema
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {relatedTools.map((relTool) => (
             <a
-              href={`/${category.slug}/${relTool.slug}`}
+              href={`/${category.slug}/${relTool.slug}/`}
               class="block focus:outline-none"
             >
               <ToolCard

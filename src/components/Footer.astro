@@ -4,12 +4,12 @@ import { categories } from '../data/tools';
 import { ShieldCheck, Heart } from 'lucide-react';
 
 const popularToolsList = [
-  { name: 'Merge PDF', path: '/pdf-tools/merge-pdf' },
-  { name: 'Compress Image', path: '/image-tools/image-compressor' },
-  { name: 'JSON Formatter', path: '/developer-tools/json-formatter' },
-  { name: 'QR Code Generator', path: '/developer-tools/qr-code-generator' },
-  { name: 'Word Counter', path: '/text-tools/word-counter' },
-  { name: 'Password Generator', path: '/developer-tools/password-generator' }
+  { name: 'Merge PDF', path: '/pdf-tools/merge-pdf/' },
+  { name: 'Compress Image', path: '/image-tools/image-compressor/' },
+  { name: 'JSON Formatter', path: '/developer-tools/json-formatter/' },
+  { name: 'QR Code Generator', path: '/developer-tools/qr-code-generator/' },
+  { name: 'Word Counter', path: '/text-tools/word-counter/' },
+  { name: 'Password Generator', path: '/developer-tools/password-generator/' }
 ];
 --- 
 
@@ -56,7 +56,7 @@ const popularToolsList = [
           {categories.map((cat) => (
             <li>
               <a
-                href={`/${cat.slug}`}
+                href={`/${cat.slug}/`}
                 class="hover:underline flex items-center justify-between w-full text-left transition-colors duration-150 group"
                 style={{ color: 'var(--text-secondary)' }}
               >
@@ -108,7 +108,7 @@ const popularToolsList = [
         <ul class="space-y-2.5 text-sm">
           <li>
             <a
-              href="/about"
+              href="/about/"
               class="hover:underline block text-left"
               style={{ color: 'var(--text-secondary)' }}
             >
@@ -117,7 +117,7 @@ const popularToolsList = [
           </li>
           <li>
             <a
-              href="/blog"
+              href="/blog/"
               class="hover:underline block text-left"
               style={{ color: 'var(--text-secondary)' }}
             >
@@ -126,7 +126,7 @@ const popularToolsList = [
           </li>
           <li>
             <a
-              href="/contact"
+              href="/contact/"
               class="hover:underline block text-left"
               style={{ color: 'var(--text-secondary)' }}
             >
@@ -135,7 +135,7 @@ const popularToolsList = [
           </li>
           <li>
             <a
-              href="/privacy-policy"
+              href="/privacy-policy/"
               class="hover:underline block text-left"
               style={{ color: 'var(--text-secondary)' }}
             >
@@ -144,7 +144,7 @@ const popularToolsList = [
           </li>
           <li>
             <a
-              href="/terms"
+              href="/terms/"
               class="hover:underline block text-left"
               style={{ color: 'var(--text-secondary)' }}
             >
