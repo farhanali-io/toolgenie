@@ -1,6 +1,5 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -21,16 +20,6 @@ export default defineConfig({
   },
   integrations: [
     react(),
-    sitemap({
-      filter: (page) => !page.endsWith('.html') && !page.includes('/index.html'),
-      serialize(item) {
-        item.url = item.url.replace(/\.html\/?$/, '/');
-        if (!item.url.endsWith('/')) {
-          item.url += '/';
-        }
-        return item;
-      }
-    }),
   ],
   vite: {
     plugins: [
