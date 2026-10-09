@@ -1,4 +1,4 @@
-# ToolGenie Robots.txt
+# ToolGenie Robots.txt 
 # All search engine bots are welcome to index all public client-side tools.
 # All major AI crawlers are explicitly allowed for search, browsing, and training.
 
