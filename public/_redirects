@@ -1,5 +1,9 @@
-# .html to clean URL - relative only, no !
+# Fix trailing slash - override default 302 to 301!
+/contact /contact/ 301!
+/direct-link-tools /direct-link-tools/ 301!
+/image-tools/image-resizer /image-tools/image-resizer/ 301!
+/terms /terms-of-use/ 301!
+/terms/ /terms-of-use/ 301!
+# .html to clean URL - MUST BE LAST
 /index.html / 301
 /*.html /:splat/ 301
-/terms/ /terms-of-use/ 301
-/terms /terms-of-use/ 301
